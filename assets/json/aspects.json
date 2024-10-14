@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Работа",
+      "optimalScore": 100.0,
+      "currentScore": 0.0
+    },
+    {
+      "name": "Отдых",
+      "optimalScore": 50.0,
+      "currentScore": 0.0
+    },
+    {
+      "name": "Здоровье",
+      "optimalScore": 70.0,
+      "currentScore": 0.0
+    },
+    {
+      "name": "Семья",
+      "optimalScore": 60.0,
+      "currentScore": 0.0
+    },
+    {
+      "name": "Саморазвитие",
+      "optimalScore": 40.0,
+      "currentScore": 0.0
+    }
+  ]
+  

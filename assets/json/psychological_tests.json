@@ -1,0 +1,250 @@
+[
+  {
+    "id": "1",
+    "title": "Stress Level Test",
+    "description": "This test helps assess your current stress levels based on various factors.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you feel stressed?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you have trouble sleeping?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "question": "How do you feel about your workload?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Very manageable",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Somewhat manageable",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Neutral",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Somewhat overwhelming",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Very overwhelming",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          4
+        ],
+        "result": "Low Stress Level: You have a good balance and are managing stress effectively."
+      },
+      {
+        "scoreRange": [
+          5,
+          9
+        ],
+        "result": "Moderate Stress Level: You may experience some stress; consider relaxation techniques."
+      },
+      {
+        "scoreRange": [
+          10,
+          12
+        ],
+        "result": "High Stress Level: It's essential to address your stressors and seek help if needed."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Anxiety Test",
+    "description": "This test assesses your level of anxiety and provides insights.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you feel anxious?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you experience physical symptoms of anxiety?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "question": "How do you handle stressful situations?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Very well",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Somewhat well",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Neutral",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Somewhat poorly",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Very poorly",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          4
+        ],
+        "result": "Low Anxiety: You seem to manage anxiety well."
+      },
+      {
+        "scoreRange": [
+          5,
+          9
+        ],
+        "result": "Moderate Anxiety: You may want to explore coping strategies."
+      },
+      {
+        "scoreRange": [
+          10,
+          12
+        ],
+        "result": "High Anxiety: Consider seeking support to manage your anxiety."
+      }
+    ]
+  }
+]
