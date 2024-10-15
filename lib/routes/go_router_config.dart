@@ -195,9 +195,7 @@ Page slideTransition({
         position: offsetAnimation,
         child: Stack(
           children: [
-            
-               child,
-            
+            child,
           ],
         ),
       );

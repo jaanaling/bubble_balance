@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plinko/core/utils/log.dart';
+import 'package:plinko/feature/analytics/models/user_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:plinko/core/utils/init_data.dart';
 import 'package:plinko/feature/aspects/models/user.dart';
@@ -61,7 +62,10 @@ Future<void> resetDailyScores() async {
     );
 
     final User? user = await locator<UserDataRepository>().getUser();
+
     if (user != null) {
+      await locator<UserDataRepository>()
+          .saveUserAnalytics(UserAnalytics(user: user, date: DateTime.now()));
       final updatedUser = User(
         name: user.name,
         completedTasksToday: [],

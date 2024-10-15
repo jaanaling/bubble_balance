@@ -25,7 +25,7 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
     on<PlanTaskForWeek>(_onPlanTaskForWeek);
     on<MarkTaskAsCompleted>(_onMarkTaskAsCompleted);
     on<AddCompletedTaskForToday>(_onAddCompletedTaskForToday);
-    on<GenerateAnalytics>(_onGenerateAnalytics);
+
     on<RemoveOverdueTask>(_onRemoveOverdueTask);
     on<AddCompletedTaskFromOverdue>(_onAddCompletedTaskFromOverdue);
     on<DeleteCompletedTask>(_onDeleteCompletedTask);
@@ -255,30 +255,7 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
     }
   }
 
-  Future<void> _onGenerateAnalytics(
-    GenerateAnalytics event,
-    Emitter<LifeAspectState> emit,
-  ) async {
-    if (state is AspectsLoaded) {
-      final currentState = state as AspectsLoaded;
 
-      final aspectScores = currentState.aspects.asMap().map((index, aspect) {
-        return MapEntry(aspect.name, aspect.currentScore);
-      });
-      final totalTasksCompleted = currentState.user.completedTasksToday.length;
-      final totalTasksPlanned =
-          currentState.user.plannedTasksForWeek.values.expand((x) => x).length;
-
-      final analytics = UserAnalytics(
-        aspectScores: aspectScores,
-        totalTasksCompleted: totalTasksCompleted,
-        totalTasksPlanned: totalTasksPlanned,
-      );
-
-      await userRepository.saveUserAnalytics(analytics);
-      emit(AnalyticsLoaded(analytics));
-    }
-  }
 
   Future<void> _onDeleteCompletedTask(
     DeleteCompletedTask event,
