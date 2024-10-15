@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:plinko/core/utils/icon_provider.dart';
 import 'package:plinko/feature/aspects/models/task.dart';
 import 'package:plinko/feature/test/models/psychological_test.dart';
 import 'package:plinko/feature/analytics/presentation/analytics_screen.dart';
@@ -63,7 +64,6 @@ GoRouter globalRouter = GoRouter(
                           tasks: tasks,
                           isPlaning: isPlaning,
                           day: day,
-                          
                         ),
                       );
                     }),
@@ -195,11 +195,13 @@ Page slideTransition({
         position: offsetAnimation,
         child: Stack(
           children: [
-            child,
+            
+               child,
+            
           ],
         ),
       );
     },
-    transitionDuration: const Duration(milliseconds: 500),
+    transitionDuration: const Duration(milliseconds: 1),
   );
 }

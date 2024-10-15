@@ -19,7 +19,7 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
   int pageIndex = 0;
-  String day = "${DateTime.now().weekday} ";
+  String day = '${DateTime.now().weekday} ';
   PageController _pageController = PageController();
 
   @override
@@ -79,15 +79,23 @@ class _MenuScreenState extends State<MenuScreen> {
 
                     final Color color = aspectScores.isNotEmpty
                         ? getColorFromScores(
-                            aspectScores
-                                .reduce((value, element) => value + element),
-                            state.aspects[index].optimalScore ?? 0,
+                            aspectScores.reduce(
+                              (value, element) => value + element,
+                            ),
+                            state.aspects[index].optimalScore,
                           ).withOpacity(1.0)
                         : const Color(0xFFD72E58);
 
                     return Column(
                       children: [
-                        Text(aspect.name),
+                        Text(
+                          aspect.name,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
                         const Gap(14),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,7 +125,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                       Colors.white,
                                       0.8,
                                     )!,
-                                    color
+                                    color,
                                   ],
                                   begin: Alignment.topRight,
                                   end: Alignment.bottomLeft,
@@ -160,29 +168,142 @@ class _MenuScreenState extends State<MenuScreen> {
                                 'add text recording',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
                               ),
                               paddingHorizontal: 40,
                               paddingVertical: 20,
                             ),
                           ),
                         ),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: tasks.length,
-                          separatorBuilder: (_, __) => Padding(
-                            padding: const EdgeInsets.all(21.0),
-                            child: const Divider(),
-                          ),
-                          itemBuilder: (context, index) => Row(
-                            children: [
-                              Text(tasks[index].task.name),
-                              if (plannedTasks.contains(tasks[index]))
-                                const Icon(Icons.access_alarms_sharp),
-                              if (overdueTasks.contains(tasks[index]))
-                                const Icon(Icons.dangerous),
-                            ],
+                        Expanded(
+                          child: ListView.separated(
+                            padding: const EdgeInsets.fromLTRB(21, 20, 21, 150),
+                            shrinkWrap: true,
+                            itemCount: tasks.length,
+                            separatorBuilder: (_, __) => Padding(
+                              padding: const EdgeInsets.all(21.0),
+                              child: Divider(
+                                color: Colors.black.withOpacity(0.3),
+                                thickness: 2,
+                                height: 2,
+                              ),
+                            ),
+                            itemBuilder: (context, index) => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromARGB(30, 0, 0, 0),
+                                        blurRadius: 5,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      completedTasks.contains(tasks[index])
+                                          ? Icons.done
+                                          : plannedTasks.contains(tasks[index])
+                                              ? Icons.alarm
+                                              : Icons.dangerous,
+                                      color: completedTasks
+                                              .contains(tasks[index])
+                                          ? Colors.green
+                                          : plannedTasks.contains(tasks[index])
+                                              ? Colors.orange
+                                              : Colors.red,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  tasks[index].task.name,
+                                  style: const TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        if (completedTasks
+                                            .contains(tasks[index])) {}
+                                        if ((plannedTasks
+                                            .contains(tasks[index]))) {
+                                          context.read<LifeAspectBloc>().add(
+                                                MarkTaskAsCompleted(
+                                                  tasks[index],
+                                                ),
+                                              );
+                                        }
+                                        if (overdueTasks
+                                            .contains(tasks[index])) {
+                                          context.read<LifeAspectBloc>().add(
+                                                RemoveOverdueTask(
+                                                  day: day,
+                                                  task: tasks[index],
+                                                ),
+                                              );
+                                        }
+                                      },
+                                      icon:  Icon(
+                                        Icons.check,
+                                        color: !completedTasks
+                                                .contains(tasks[index])
+                                            ? Colors.green
+                                            : Colors.transparent,
+                                        size: 30,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        if (completedTasks
+                                            .contains(tasks[index])) {
+                                          context.read<LifeAspectBloc>().add(
+                                                DeleteCompletedTask(
+                                                  day: day,
+                                                  task: tasks[index],
+                                                ),
+                                              );
+                                        }
+                                        if (plannedTasks
+                                            .contains(tasks[index])) {
+                                          context.read<LifeAspectBloc>().add(
+                                                DeletePlannedTask(
+                                                  day: day,
+                                                  task: tasks[index],
+                                                ),
+                                              );
+                                        }
+                                        if (overdueTasks
+                                            .contains(tasks[index])) {
+                                          context.read<LifeAspectBloc>().add(
+                                                RemoveOverdueTask(
+                                                  day: day,
+                                                  task: tasks[index],
+                                                ),
+                                              );
+                                        }
+                                        setState(() {});
+                                      },
+                                      icon: const Icon(
+                                        CupertinoIcons.delete,
+                                        color: Colors.red,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

@@ -26,6 +26,10 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
     on<MarkTaskAsCompleted>(_onMarkTaskAsCompleted);
     on<AddCompletedTaskForToday>(_onAddCompletedTaskForToday);
     on<GenerateAnalytics>(_onGenerateAnalytics);
+    on<RemoveOverdueTask>(_onRemoveOverdueTask);
+    on<AddCompletedTaskFromOverdue>(_onAddCompletedTaskFromOverdue);
+    on<DeleteCompletedTask>(_onDeleteCompletedTask);
+    on<DeletePlannedTask>(_onDeletePlannedTask);
   }
 
   Future<void> _onLoadAspects(
@@ -61,7 +65,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
         ..add(event.aspect);
       await aspectRepository.saveAspects(updatedAspects);
       _emitUpdatedState(
-          emit, updatedAspects, currentState.tasks, currentState.user);
+        emit,
+        updatedAspects,
+        currentState.tasks,
+        currentState.user,
+      );
     }
   }
 
@@ -75,7 +83,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
         ..removeWhere((aspect) => aspect.name == event.aspect.name);
       await aspectRepository.saveAspects(updatedAspects);
       _emitUpdatedState(
-          emit, updatedAspects, currentState.tasks, currentState.user);
+        emit,
+        updatedAspects,
+        currentState.tasks,
+        currentState.user,
+      );
     }
   }
 
@@ -85,7 +97,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
       final updatedTasks = List<Task>.from(currentState.tasks)..add(event.task);
       await aspectRepository.saveTasks(updatedTasks);
       _emitUpdatedState(
-          emit, currentState.aspects, updatedTasks, currentState.user);
+        emit,
+        currentState.aspects,
+        updatedTasks,
+        currentState.user,
+      );
     }
   }
 
@@ -125,7 +141,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
 
       await userRepository.saveUser(updatedUser);
       _emitUpdatedState(
-          emit, currentState.aspects, currentState.tasks, updatedUser);
+        emit,
+        currentState.aspects,
+        currentState.tasks,
+        updatedUser,
+      );
     }
   }
 
@@ -153,7 +173,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
 
       await userRepository.saveUser(updatedUser);
       _emitUpdatedState(
-          emit, currentState.aspects, currentState.tasks, updatedUser);
+        emit,
+        currentState.aspects,
+        currentState.tasks,
+        updatedUser,
+      );
     }
   }
 
@@ -174,7 +198,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
       await userRepository.saveUser(updatedUser);
       await userRepository.addCompletedTaskForToday(task);
       _emitUpdatedState(
-          emit, currentState.aspects, currentState.tasks, updatedUser);
+        emit,
+        currentState.aspects,
+        currentState.tasks,
+        updatedUser,
+      );
     }
   }
 
@@ -195,7 +223,11 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
 
         await userRepository.saveUser(currentState.user);
         _emitUpdatedState(
-            emit, currentState.aspects, currentState.tasks, currentState.user);
+          emit,
+          currentState.aspects,
+          currentState.tasks,
+          currentState.user,
+        );
       }
     }
   }
@@ -211,10 +243,14 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
         final taskToAdd = event.task;
 
         await _onAddCompletedTaskForToday(
-            AddCompletedTaskForToday(taskToAdd.task), emit);
+          AddCompletedTaskForToday(taskToAdd.task),
+          emit,
+        );
 
         await _onRemoveOverdueTask(
-            RemoveOverdueTask(day: event.day, task: taskToAdd), emit);
+          RemoveOverdueTask(day: event.day, task: taskToAdd),
+          emit,
+        );
       }
     }
   }
@@ -241,6 +277,52 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
 
       await userRepository.saveUserAnalytics(analytics);
       emit(AnalyticsLoaded(analytics));
+    }
+  }
+
+  Future<void> _onDeleteCompletedTask(
+    DeleteCompletedTask event,
+    Emitter<LifeAspectState> emit,
+  ) async {
+    if (state is AspectsLoaded) {
+      final currentState = state as AspectsLoaded;
+
+      currentState.user.completedTasksToday
+          .removeWhere((t) => t.id == event.task.id);
+
+      await userRepository.saveUser(currentState.user);
+
+      _emitUpdatedState(
+        emit,
+        currentState.aspects,
+        currentState.tasks,
+        currentState.user,
+      );
+    }
+  }
+
+  Future<void> _onDeletePlannedTask(
+    DeletePlannedTask event,
+    Emitter<LifeAspectState> emit,
+  ) async {
+    if (state is AspectsLoaded) {
+      final currentState = state as AspectsLoaded;
+      final updatedPlannedTasksForWeek = Map<String, List<IdentifiedTask>>.from(
+        currentState.user.plannedTasksForWeek,
+      );
+      updatedPlannedTasksForWeek.forEach((day, tasks) {
+        tasks.removeWhere((t) => t.id == event.task.id);
+      });
+      final updatedUser = currentState.user.copyWith(
+        plannedTasksForWeek: updatedPlannedTasksForWeek,
+      );
+      await userRepository.saveUser(updatedUser);
+      _emitUpdatedState(
+        emit,
+        currentState.aspects,
+        currentState.tasks,
+        updatedUser,
+      );
     }
   }
 

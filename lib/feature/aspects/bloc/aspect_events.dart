@@ -63,7 +63,7 @@ class RemoveOverdueTask extends LifeAspectEvent {
   final String day;
   final IdentifiedTask task;
 
-   RemoveOverdueTask({required this.day, required this.task});
+  RemoveOverdueTask({required this.day, required this.task});
 
   @override
   List<Object> get props => [day, task];
@@ -73,7 +73,27 @@ class AddCompletedTaskFromOverdue extends LifeAspectEvent {
   final String day;
   final IdentifiedTask task;
 
-   AddCompletedTaskFromOverdue({required this.day, required this.task});
+  AddCompletedTaskFromOverdue({required this.day, required this.task});
+
+  @override
+  List<Object> get props => [day, task];
+}
+
+class DeleteCompletedTask extends LifeAspectEvent {
+  final String day;
+  final IdentifiedTask task;
+
+  DeleteCompletedTask({required this.day, required this.task});
+
+  @override
+  List<Object> get props => [day, task];
+}
+
+class DeletePlannedTask extends LifeAspectEvent {
+  final String day;
+  final IdentifiedTask task;
+
+  DeletePlannedTask({required this.day, required this.task});
 
   @override
   List<Object> get props => [day, task];
