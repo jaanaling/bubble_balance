@@ -29,19 +29,30 @@ class TestScreen extends StatelessWidget {
             final currentQuestion =
                 curTest.questions[curTest.currentQuestionIndex];
 
-                logger.d(curTest.currentQuestionIndex);
-
+            logger.d(curTest.currentQuestionIndex);
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(currentQuestion.question),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  child: Text(
+                    currentQuestion.question,
+                    style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        fontFamily: 'Mon'),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
                 ListView.separated(
                   separatorBuilder: (context, index) => const Gap(14),
                   shrinkWrap: true,
                   itemCount: currentQuestion.answers.length,
+                  padding: EdgeInsets.only(bottom: 80),
                   itemBuilder: (context, index) {
-                    return GestureDetector(
+                    return InkWell(
                       onTap: () {
                         context.read<TestBloc>().add(
                               SubmitAnswerEvent(
@@ -53,6 +64,8 @@ class TestScreen extends StatelessWidget {
                               ),
                             );
                       },
+                      splashColor: Colors.deepPurpleAccent,
+                      borderRadius: BorderRadius.circular(37.5),
                       child: Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(
@@ -63,7 +76,7 @@ class TestScreen extends StatelessWidget {
                           padding: EdgeInsets.all(11),
                           child: Row(
                             children: [
-                              DecoratedBox(
+                              Ink(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -73,9 +86,31 @@ class TestScreen extends StatelessWidget {
                                   ),
                                   shape: BoxShape.circle,
                                 ),
+                                child: SizedBox(
+                                  height: 54,
+                                  width: 54,
+                                  child: Center(
+                                    child: Text(
+                                      String.fromCharCode(index + 65),
+                                      style: TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          fontFamily: 'Mon'),
+                                    ),
+                                  ),
+                                ),
                               ),
                               Gap(13),
-                              Text(currentQuestion.answers[index].answerText),
+                              Expanded(
+                                child: Text(
+                                  currentQuestion.answers[index].answerText,
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mon'),
+                                ),
+                              ),
                             ],
                           ),
                         ),

@@ -34,10 +34,11 @@ class SetCurrentTestEvent extends TestEvent {
 }
 
 class ResetTestEvent extends TestEvent {
-  final int testId;
+  final PsychologicalTest test;
+  final BuildContext context;
 
-  ResetTestEvent(this.testId);
+  ResetTestEvent({required this.test, required this.context});
 
   @override
-  List<Object> get props => [testId];
+  List<Object> get props => [test];
 }

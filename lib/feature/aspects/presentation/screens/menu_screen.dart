@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:plinko/feature/aspects/bloc/aspect_bloc.dart';
 import 'package:plinko/feature/aspects/models/task.dart';
 import 'package:plinko/feature/aspects/utils/utils.dart';
@@ -20,7 +21,22 @@ class _MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
   int pageIndex = 0;
   String day = '${DateTime.now().weekday} ';
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
+  final List<String> weekdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+
+  String getFormattedDate(String dayString) {
+    int dayNumber = int.parse(dayString);
+    DateTime date = DateTime(2023, 1, dayNumber + 1);
+    return DateFormat('EEEE').format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +52,58 @@ class _MenuScreenState extends State<MenuScreen> {
                 const Gap(1),
                 _buildTabItem(1, 'WEEK'),
               ],
+            ),
+          ),
+        ),
+
+        if(_selectedIndex==1)
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: CupertinoButton(
+            onPressed: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: 250,
+                    color: CupertinoColors.systemBackground,
+                    child: CupertinoPicker(
+                      itemExtent: 32.0,
+                      onSelectedItemChanged: (int index) {
+                        setState(() {
+                          day = '${index + 1}';
+                        });
+                      },
+                      children: weekdays.map((day) => Text(day)).toList(),
+                    ),
+                  );
+                },
+              );
+            },
+            color: Color(0xFFEFEFEF),
+            padding: EdgeInsets.zero,
+            borderRadius: BorderRadius.circular(15),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    getFormattedDate(day),
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontFamily: 'Mon',
+                    ),
+                  ),
+                  const Gap(20),
+                  const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Color(0xFF939393),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -254,7 +322,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                               );
                                         }
                                       },
-                                      icon:  Icon(
+                                      icon: Icon(
                                         Icons.check,
                                         color: !completedTasks
                                                 .contains(tasks[index])

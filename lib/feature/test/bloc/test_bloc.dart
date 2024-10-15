@@ -109,15 +109,20 @@ class TestBloc extends Bloc<TestEvent, TestState> {
     ResetTestEvent event,
     Emitter<TestState> emit,
   ) async {
-    await testRepository.resetTest(event.testId);
+    await testRepository.resetTest(int.parse(event.test.id));
 
     final tests = await testRepository.getAllTests();
+
+    event.context.pushReplacement(
+      "${RouteValue.tests.path}/${RouteValue.test.path}",
+      extra: event.test,
+    );
 
     emit(
       TestLoadedState(
         tests: tests,
         currentTest: tests.firstWhere(
-          (test) => test.id == event.testId.toString(),
+          (test) => test.id == int.parse(event.test.id).toString(),
         ),
       ),
     );
