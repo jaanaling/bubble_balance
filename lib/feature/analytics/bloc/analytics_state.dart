@@ -7,7 +7,7 @@ class AnalyticsInitialState extends AnalyticsState {}
 class AnalyticsLoadingState extends AnalyticsState {}
 
 class AnalyticsLoadedState extends AnalyticsState {
-  final UserAnalytics analytics;
+  final List<UserAnalytics> analytics;
 
   AnalyticsLoadedState(this.analytics);
 }

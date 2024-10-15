@@ -13,7 +13,7 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
 
   AnalyticsBloc() : super(AnalyticsInitialState()) {
     on<LoadAnalyticsEvent>(_onLoadAnalytics);
-    on<SaveAnalyticsEvent>(_onSaveAnalytics);
+
   }
 
   Future<void> _onLoadAnalytics(
@@ -31,13 +31,4 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
     }
   }
 
-  Future<void> _onSaveAnalytics(
-      SaveAnalyticsEvent event, Emitter<AnalyticsState> emit) async {
-    try {
-      await userRepository.saveUserAnalytics(event.analytics);
-      emit(AnalyticsLoadedState(event.analytics));
-    } catch (e) {
-      emit(AnalyticsErrorState(e.toString()));
-    }
-  }
 }

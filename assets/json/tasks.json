@@ -1,36 +1,1308 @@
 [
   {
-    "name": "Выгул собаки",
+    "name": "Walking the Dog",
     "aspectScores": {
-      "Отдых": 5.0,
-      "Работа": -10.0
+      "Rest": 5.0,
+      "Work": -10.0
     }
   },
   {
-    "name": "Тренировка",
+    "name": "Workout",
     "aspectScores": {
-      "Здоровье": 15.0,
-      "Отдых": 5.0
+      "Health": 15.0,
+      "Rest": 5.0
     }
   },
   {
-    "name": "Чтение книги",
+    "name": "Reading a Book",
     "aspectScores": {
-      "Саморазвитие": 10.0
+      "Self-Development": 10.0
     }
   },
   {
-    "name": "Работа над проектом",
+    "name": "Working on a Project",
     "aspectScores": {
-      "Работа": 20.0,
-      "Отдых": -5.0
+      "Work": 20.0,
+      "Rest": -5.0
     }
   },
   {
-    "name": "Время с семьей",
+    "name": "Spending Time with Family",
     "aspectScores": {
-      "Семья": 15.0,
-      "Работа": -10.0
+      "Family": 15.0,
+      "Work": -10.0
+    }
+  },
+  {
+    "name": "Cooking a Healthy Meal",
+    "aspectScores": {
+      "Health": 10.0,
+      "Rest": 2.0
+    }
+  },
+  {
+    "name": "Meditation",
+    "aspectScores": {
+      "Mental Well-being": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Socializing with Friends",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Work": -5.0
+    }
+  },
+  {
+    "name": "Budgeting and Saving Money",
+    "aspectScores": {
+      "Finance": 25.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Journaling",
+    "aspectScores": {
+      "Mental Well-being": 10.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Participating in a Hobby",
+    "aspectScores": {
+      "Leisure Activities": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Planning Future Goals",
+    "aspectScores": {
+      "Personal Goals": 20.0,
+      "Self-Development": 10.0
+    }
+  },
+  {
+    "name": "Volunteering",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Gardening",
+    "aspectScores": {
+      "Rest": 10.0,
+      "Health": 5.0
+    }
+  },
+  {
+    "name": "Learning a New Skill",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Cleaning the House",
+    "aspectScores": {
+      "Work": 10.0,
+      "Rest": -5.0
+    }
+  },
+  {
+    "name": "Watching a Movie",
+    "aspectScores": {
+      "Rest": 10.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Going for a Nature Walk",
+    "aspectScores": {
+      "Rest": 15.0,
+      "Health": 5.0
+    }
+  },
+  {
+    "name": "Practicing a Musical Instrument",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Attending a Workshop",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Taking a Yoga Class",
+    "aspectScores": {
+      "Health": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Playing Board Games",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Doing Puzzles",
+    "aspectScores": {
+      "Self-Development": 10.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Going to a Concert",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Doing Volunteer Work",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Cooking New Recipes",
+    "aspectScores": {
+      "Health": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Mindfulness",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking a Day Trip",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Family": 10.0
+    }
+  },
+  {
+    "name": "Planning a Budget",
+    "aspectScores": {
+      "Finance": 25.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Going to a Museum",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Joining a Book Club",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Self-Development": 10.0
+    }
+  },
+  {
+    "name": "Writing Letters to Friends",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking a Course Online",
+    "aspectScores": {
+      "Self-Development": 25.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Starting a Blog",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating Art",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Learning a Language",
+    "aspectScores": {
+      "Self-Development": 25.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Building a Model",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking a Dance Class",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Playing Sports",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Decluttering Your Space",
+    "aspectScores": {
+      "Work": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring New Hobbies",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Planning Family Activities",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Enjoying a Hot Bath",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Health": 5.0
+    }
+  },
+  {
+    "name": "Going to the Gym",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Positive Affirmations",
+    "aspectScores": {
+      "Mental Well-being": 15.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Completing a Daily Journal",
+    "aspectScores": {
+      "Mental Well-being": 10.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Taking Time for Yourself",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Mental Well-being": 5.0
+    }
+  },
+  {
+    "name": "Making Vision Boards",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Getting Organized",
+    "aspectScores": {
+      "Work": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Participating in Local Events",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Self-Development": 10.0
+    }
+  },
+  {
+    "name": "Writing Short Stories",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Listening to Podcasts",
+    "aspectScores": {
+      "Self-Development": 10.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Scrapbook",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making DIY Projects",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Setting Daily Goals",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Networking with Professionals",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Joining a Sports Team",
+    "aspectScores": {
+      "Health": 20.0,
+      "Social Life": 10.0
+    }
+  },
+  {
+    "name": "Hosting Dinner Parties",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Family": 5.0
+    }
+  },
+  {
+    "name": "Trying New Restaurants",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Gratitude",
+    "aspectScores": {
+      "Mental Well-being": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking Care of Pets",
+    "aspectScores": {
+      "Health": 15.0,
+      "Family": 5.0
+    }
+  },
+  {
+    "name": "Completing Home Projects",
+    "aspectScores": {
+      "Work": 20.0,
+      "Rest": -5.0
+    }
+  },
+  {
+    "name": "Exploring Nearby Cities",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Social Life": 10.0
+    }
+  },
+  {
+    "name": "Practicing Relaxation Techniques",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Hosting Game Nights",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Engaging in Arts and Crafts",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making Time for Family",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Personal Website",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Practicing Critical Thinking",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Going on Nature Hikes",
+    "aspectScores": {
+      "Rest": 15.0,
+      "Health": 10.0
+    }
+  },
+  {
+    "name": "Planning Family Vacations",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Writing Poems",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Starting a YouTube Channel",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making Homemade Gifts",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Learning About Different Cultures",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking a Photography Class",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating Digital Art",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Finding a Mentor",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Taking Family Photos",
+    "aspectScores": {
+      "Family": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Public Speaking",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Going for Bike Rides",
+    "aspectScores": {
+      "Health": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring New Recipes",
+    "aspectScores": {
+      "Health": 15.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Making a Bucket List",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Establishing a Morning Routine",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Staying Up to Date with News",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Time Management",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Spending Time in Nature",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Health": 5.0
+    }
+  },
+  {
+    "name": "Joining a Fitness Class",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring New Music Genres",
+    "aspectScores": {
+      "Self-Development": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Fitness Plan",
+    "aspectScores": {
+      "Health": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Using Social Media Responsibly",
+    "aspectScores": {
+      "Mental Well-being": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking Digital Detox Days",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making Time for Reflection",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Having Meaningful Conversations",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Empathy",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Mental Well-being": 5.0
+    }
+  },
+  {
+    "name": "Focusing on Breathing Techniques",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Connecting with Old Friends",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making Healthy Snacks",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Finding Work-Life Balance",
+    "aspectScores": {
+      "Work": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Participating in Community Service",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Taking Up Meditation",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Setting Boundaries",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Practicing Active Listening",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Mental Well-being": 5.0
+    }
+  },
+  {
+    "name": "Exploring Nature Trails",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Vision Board",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making Time for Friends",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Learning a New Skill",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Maintaining a Journal",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Cooking with Family",
+    "aspectScores": {
+      "Family": 15.0,
+      "Health": 5.0
+    }
+  },
+  {
+    "name": "Establishing a Self-Care Routine",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Mindfulness",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Going to the Theater",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Playing Board Games",
+    "aspectScores": {
+      "Social Life": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Doing Yoga",
+    "aspectScores": {
+      "Health": 20.0,
+      "Mental Well-being": 5.0
+    }
+  },
+  {
+    "name": "Spending Time with Grandparents",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking Dance Classes",
+    "aspectScores": {
+      "Health": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Exploring Local Parks",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Reading Non-Fiction Books",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Deep Work",
+    "aspectScores": {
+      "Work": 20.0,
+      "Mental Well-being": 5.0
+    }
+  },
+  {
+    "name": "Taking Nature Walks",
+    "aspectScores": {
+      "Health": 15.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Setting Intentions",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Joining a Book Club",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Participating in Team Sports",
+    "aspectScores": {
+      "Health": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Volunteering for a Cause",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Exploring New Hobbies",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Establishing Healthy Boundaries",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Creating a Family Tradition",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Developing a Reading Habit",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring New Places",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Learning a New Language",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Gratitude Journaling",
+    "aspectScores": {
+      "Mental Well-being": 15.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Engaging in Group Discussions",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking Breaks to Recharge",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Daily Schedule",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Going on Road Trips",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Exploring Photography",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Participating in Online Courses",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Visiting Historical Sites",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Spending Time with Siblings",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Starting a Garden",
+    "aspectScores": {
+      "Health": 20.0,
+      "Self-Development": 5.0
+    }
+  },
+  {
+    "name": "Practicing Visualization Techniques",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Taking Family Trips",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Going to Local Events",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Making Time for Hobbies",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Finding New Interests",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Personal Mission Statement",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Family Photo Album",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring Local Markets",
+    "aspectScores": {
+      "Rest": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Making Family Recipes",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Joining a Sports League",
+    "aspectScores": {
+      "Health": 20.0,
+      "Social Life": 5.0
+    }
+  },
+  {
+    "name": "Establishing a Regular Exercise Routine",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring Mindfulness Practices",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Volunteering at a Shelter",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Taking Art Classes",
+    "aspectScores": {
+      "Self-Development": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Creating a Family Recipe Book",
+    "aspectScores": {
+      "Family": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Going on Nature Retreats",
+    "aspectScores": {
+      "Health": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Practicing Self-Compassion",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Exploring Cultural Festivals",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Joining a Support Group",
+    "aspectScores": {
+      "Social Life": 20.0,
+      "Mental Well-being": 5.0
+    }
+  },
+  {
+    "name": "Finding Balance in Work-Life",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Work": 5.0
+    }
+  },
+  {
+    "name": "Creating a Relaxation Space",
+    "aspectScores": {
+      "Mental Well-being": 20.0,
+      "Rest": 5.0
+    }
+  },
+  {
+    "name": "Engaging in Mindful Breathing",
+    "aspectScores": {
+      "Mental Well-being": 20.0
+    }
+  },
+  {
+    "name": "Participating in Community Service",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Taking Up Meditation",
+    "aspectScores": {
+      "Mental Well-being": 20.0
+    }
+  },
+  {
+    "name": "Setting Boundaries",
+    "aspectScores": {
+      "Mental Well-being": 20.0
+    }
+  },
+  {
+    "name": "Practicing Active Listening",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Exploring Nature Trails",
+    "aspectScores": {
+      "Health": 20.0
+    }
+  },
+  {
+    "name": "Creating a Vision Board",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Making Time for Friends",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Learning a New Skill",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Maintaining a Journal",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Establishing a Self-Care Routine",
+    "aspectScores": {
+      "Mental Well-being": 20.0
+    }
+  },
+  {
+    "name": "Practicing Mindfulness",
+    "aspectScores": {
+      "Mental Well-being": 20.0
+    }
+  },
+  {
+    "name": "Doing Yoga",
+    "aspectScores": {
+      "Health": 20.0
+    }
+  },
+  {
+    "name": "Taking Dance Classes",
+    "aspectScores": {
+      "Health": 20.0
+    }
+  },
+  {
+    "name": "Joining a Book Club",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Participating in Team Sports",
+    "aspectScores": {
+      "Health": 20.0
+    }
+  },
+  {
+    "name": "Volunteering for a Cause",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Exploring New Hobbies",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Creating a Family Tradition",
+    "aspectScores": {
+      "Family": 20.0
+    }
+  },
+  {
+    "name": "Developing a Reading Habit",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Learning a New Language",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Engaging in Group Discussions",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Creating a Daily Schedule",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Exploring Photography",
+    "aspectScores": {
+      "Self-Development": 20.0
+    }
+  },
+  {
+    "name": "Taking Family Trips",
+    "aspectScores": {
+      "Family": 20.0
+    }
+  },
+  {
+    "name": "Creating a Family Recipe Book",
+    "aspectScores": {
+      "Family": 20.0
+    }
+  },
+  {
+    "name": "Practicing Self-Compassion",
+    "aspectScores": {
+      "Mental Well-being": 20.0
+    }
+  },
+  {
+    "name": "Exploring Cultural Festivals",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Joining a Support Group",
+    "aspectScores": {
+      "Social Life": 20.0
+    }
+  },
+  {
+    "name": "Creating a Relaxation Space",
+    "aspectScores": {
+      "Mental Well-being": 20.0
     }
   }
 ]

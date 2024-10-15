@@ -1,28 +1,52 @@
 [
-    {
-      "name": "Работа",
-      "optimalScore": 100.0,
-      "currentScore": 0.0
-    },
-    {
-      "name": "Отдых",
-      "optimalScore": 50.0,
-      "currentScore": 0.0
-    },
-    {
-      "name": "Здоровье",
-      "optimalScore": 70.0,
-      "currentScore": 0.0
-    },
-    {
-      "name": "Семья",
-      "optimalScore": 60.0,
-      "currentScore": 0.0
-    },
-    {
-      "name": "Саморазвитие",
-      "optimalScore": 40.0,
-      "currentScore": 0.0
-    }
-  ]
-  
+  {
+    "name": "Work",
+    "optimalScore": 100.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Rest",
+    "optimalScore": 50.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Health",
+    "optimalScore": 70.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Family",
+    "optimalScore": 60.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Self-Development",
+    "optimalScore": 40.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Social Life",
+    "optimalScore": 80.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Finance",
+    "optimalScore": 90.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Mental Well-being",
+    "optimalScore": 75.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Leisure Activities",
+    "optimalScore": 60.0,
+    "currentScore": 0.0
+  },
+  {
+    "name": "Personal Goals",
+    "optimalScore": 50.0,
+    "currentScore": 0.0
+  }
+]

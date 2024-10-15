@@ -246,5 +246,1184 @@
         "result": "High Anxiety: Consider seeking support to manage your anxiety."
       }
     ]
+  },
+  {
+    "id": "3",
+    "title": "Depression Screening Test",
+    "description": "This test helps assess symptoms of depression.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you feel sad or hopeless?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Have you lost interest in activities you once enjoyed?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Low Depression: You are generally feeling well."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Depression: You may want to talk to someone."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "High Depression: It's essential to seek professional help."
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Self-Esteem Test",
+    "description": "This test evaluates your self-esteem levels.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How do you feel about yourself?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Very positive",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Somewhat positive",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Neutral",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Somewhat negative",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Very negative",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you accept compliments easily?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "High Self-Esteem: You have a positive view of yourself."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Self-Esteem: You may have some self-doubts."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Low Self-Esteem: Consider working on your self-image."
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "Sleep Quality Test",
+    "description": "This test assesses the quality of your sleep.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How well do you sleep at night?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Very well",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Well",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Fairly well",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Poorly",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Very poorly",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you often wake up during the night?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Physical Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Good Sleep Quality: You are likely getting restful sleep."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Sleep Quality: Consider improving your sleep environment."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Poor Sleep Quality: It's important to address your sleep issues."
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "title": "Work-Life Balance Test",
+    "description": "This test evaluates your work-life balance.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How satisfied are you with your work-life balance?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Very satisfied",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Satisfied",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Neutral",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Unsatisfied",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Very unsatisfied",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you often bring work home?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Good Work-Life Balance: You are managing your time effectively."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Work-Life Balance: You may need to adjust your priorities."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Poor Work-Life Balance: It's important to create boundaries."
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "title": "Stress Management Test",
+    "description": "This test assesses your current stress management strategies.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "Do you have coping strategies for stress?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Yes, very effective",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Yes, somewhat effective",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Neutral",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "No, not effective",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "No, I don't have any",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "How often do you practice relaxation techniques?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Regularly",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Sometimes",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Rarely",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Never",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Not sure what to do",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Good Stress Management: You are effectively managing stress."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Stress Management: You could benefit from more strategies."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Poor Stress Management: Consider seeking help."
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "title": "Anxiety Test",
+    "description": "This test helps evaluate your anxiety levels.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "Do you often feel nervous or anxious?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you have physical symptoms of anxiety (e.g., sweating, shaking)?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Never",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Rarely",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Often",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Always",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Low Anxiety: You generally feel calm."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Anxiety: You may want to manage your anxiety levels."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "High Anxiety: Consider seeking professional support."
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "title": "Social Connection Test",
+    "description": "This test assesses your social connections and support.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you interact with friends or family?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Daily",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "A few times a week",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Once a week",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you feel supported by your social network?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Strong Social Connections: You have a supportive network."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Social Connections: Consider enhancing your connections."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Weak Social Connections: It may help to reach out to others."
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Mindfulness Test",
+    "description": "This test assesses your mindfulness practices.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you practice mindfulness or meditation?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Daily",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "A few times a week",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Once a week",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you find it easy to focus on the present moment?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "High Mindfulness: You are effectively practicing mindfulness."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Mindfulness: Consider incorporating more practices."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Low Mindfulness: It may benefit you to explore mindfulness techniques."
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "title": "Emotional Awareness Test",
+    "description": "This test helps assess your emotional awareness.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you recognize your emotions as they arise?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you understand the reasons behind your emotions?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "High Emotional Awareness: You are in tune with your feelings."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Emotional Awareness: You may benefit from reflection."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Low Emotional Awareness: Consider exploring your emotions more deeply."
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "title": "Gratitude Test",
+    "description": "This test assesses your practice of gratitude.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How often do you express gratitude?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Daily",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "A few times a week",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Once a week",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you keep a gratitude journal?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Yes",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Sometimes",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Rarely",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "No",
+            "score": 3
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "High Gratitude: You actively practice gratitude."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Gratitude: You could benefit from more gratitude practices."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Low Gratitude: Consider incorporating gratitude into your daily life."
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "title": "Coping Skills Test",
+    "description": "This test evaluates your coping skills.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How do you usually cope with stress?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Healthy ways (exercise, talking to friends)",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Mixed methods (some healthy, some unhealthy)",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Unhealthy ways (substance use, avoidance)",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you seek help from others when dealing with challenges?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Sometimes",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Rarely",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Never",
+            "score": 3
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "Strong Coping Skills: You handle stress effectively."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Coping Skills: Consider improving your coping strategies."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Weak Coping Skills: Seek support for better strategies."
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "title": "Self-Esteem Test",
+    "description": "This test evaluates your self-esteem levels.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How do you feel about yourself overall?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Very positive",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Somewhat positive",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Neutral",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Somewhat negative",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Very negative",
+            "score": 4
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you believe you deserve good things in life?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "answerText": "Never",
+            "score": 4
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "High Self-Esteem: You have a positive view of yourself."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Self-Esteem: You might benefit from self-reflection."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Low Self-Esteem: Consider exploring your self-worth."
+      }
+    ]
+  },
+  {
+    "id": "15",
+    "title": "Resilience Test",
+    "description": "This test assesses your resilience in facing challenges.",
+    "questions": [
+      {
+        "id": "1",
+        "question": "How do you respond to setbacks?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "I bounce back quickly",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "I take time but recover",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "I struggle to recover",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Do you feel able to cope with difficulties?",
+        "answers": [
+          {
+            "id": "1",
+            "answerText": "Always",
+            "score": 0
+          },
+          {
+            "id": "2",
+            "answerText": "Often",
+            "score": 1
+          },
+          {
+            "id": "3",
+            "answerText": "Sometimes",
+            "score": 2
+          },
+          {
+            "id": "4",
+            "answerText": "Rarely",
+            "score": 3
+          },
+          {
+            "id": "5",
+            "score": 4,
+            "answerText": "Never"
+          }
+        ]
+      }
+    ],
+    "category": "Mental Health",
+    "outcomes": [
+      {
+        "scoreRange": [
+          0,
+          2
+        ],
+        "result": "High Resilience: You handle challenges well."
+      },
+      {
+        "scoreRange": [
+          3,
+          6
+        ],
+        "result": "Moderate Resilience: Consider building more resilience."
+      },
+      {
+        "scoreRange": [
+          7,
+          8
+        ],
+        "result": "Low Resilience: Seek support to enhance resilience."
+      }
+    ]
   }
 ]

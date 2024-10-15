@@ -1,14 +1,126 @@
 [
   {
-    "title": "Совет 1",
-    "description": "Описание первого совета"
+    "title": "Prioritize Your Tasks",
+    "description": "Make a list of tasks and rank them by importance. Focus on the most important ones first to increase productivity."
   },
   {
-    "title": "Совет 2",
-    "description": "Описание второго совета"
+    "title": "Take Short Breaks",
+    "description": "Working non-stop can lead to burnout. Take short breaks every 90 minutes to refresh your mind and maintain focus."
   },
   {
-    "title": "Совет 3",
-    "description": "Описание третьего совета"
+    "title": "Practice Mindfulness",
+    "description": "Spend a few minutes each day practicing mindfulness or meditation to reduce stress and improve mental clarity."
+  },
+  {
+    "title": "Set Specific Goals",
+    "description": "Define clear, achievable goals for each day to give yourself direction and purpose."
+  },
+  {
+    "title": "Limit Distractions",
+    "description": "Identify and minimize distractions in your workspace to enhance focus and efficiency."
+  },
+  {
+    "title": "Use a Timer",
+    "description": "Use the Pomodoro technique: work for 25 minutes and then take a 5-minute break to boost productivity."
+  },
+  {
+    "title": "Reflect on Your Day",
+    "description": "Spend a few minutes at the end of each day to reflect on your accomplishments and areas for improvement."
+  },
+  {
+    "title": "Stay Hydrated",
+    "description": "Drinking enough water can improve concentration and cognitive function. Keep a water bottle handy."
+  },
+  {
+    "title": "Limit Multitasking",
+    "description": "Focus on one task at a time. Multitasking can reduce efficiency and increase stress."
+  },
+  {
+    "title": "Create a Routine",
+    "description": "Establish a daily routine to create structure and help manage your time effectively."
+  },
+  {
+    "title": "Set Boundaries",
+    "description": "Learn to say no to tasks that do not align with your goals or priorities to maintain focus on what matters."
+  },
+  {
+    "title": "Practice Gratitude",
+    "description": "Take a moment each day to acknowledge things you are grateful for to enhance your mood and perspective."
+  },
+  {
+    "title": "Get Enough Sleep",
+    "description": "Ensure you get adequate sleep each night to improve focus, decision-making, and emotional well-being."
+  },
+  {
+    "title": "Break Tasks into Smaller Steps",
+    "description": "Divide larger tasks into smaller, manageable steps to make them less overwhelming and easier to tackle."
+  },
+  {
+    "title": "Use Positive Affirmations",
+    "description": "Incorporate positive affirmations into your day to boost confidence and improve your mental state."
+  },
+  {
+    "title": "Stay Organized",
+    "description": "Keep your workspace tidy and organized to help reduce stress and improve efficiency."
+  },
+  {
+    "title": "Limit Screen Time",
+    "description": "Take breaks from screens to reduce eye strain and mental fatigue. Engage in offline activities."
+  },
+  {
+    "title": "Engage in Physical Activity",
+    "description": "Incorporate regular physical activity into your routine to boost mood and energy levels."
+  },
+  {
+    "title": "Connect with Others",
+    "description": "Spend time with friends and family to foster connections and support your emotional health."
+  },
+  {
+    "title": "Practice Deep Breathing",
+    "description": "Use deep breathing exercises to calm your mind and reduce anxiety during stressful moments."
+  },
+  {
+    "title": "Embrace Flexibility",
+    "description": "Be open to adjusting your plans when necessary. Flexibility can reduce stress and improve resilience."
+  },
+  {
+    "title": "Limit Social Media",
+    "description": "Reduce time spent on social media to minimize comparisons and negative feelings."
+  },
+  {
+    "title": "Learn Something New",
+    "description": "Engage in new activities or hobbies to stimulate your mind and boost your confidence."
+  },
+  {
+    "title": "Celebrate Small Wins",
+    "description": "Acknowledge and celebrate your small achievements to build momentum and motivation."
+  },
+  {
+    "title": "Keep a Journal",
+    "description": "Writing down your thoughts and feelings can provide clarity and help process emotions."
+  },
+  {
+    "title": "Practice Self-Compassion",
+    "description": "Be kind to yourself during challenging times. Recognize that everyone makes mistakes."
+  },
+  {
+    "title": "Plan Your Day the Night Before",
+    "description": "Spend a few minutes each evening planning your next day to enhance preparedness and focus."
+  },
+  {
+    "title": "Seek Professional Help if Needed",
+    "description": "If you're struggling with your mental health, don't hesitate to seek support from a mental health professional."
+  },
+  {
+    "title": "Limit Caffeine Intake",
+    "description": "Too much caffeine can lead to anxiety and sleep disturbances. Monitor your intake for better focus."
+  },
+  {
+    "title": "Establish a Wind-Down Routine",
+    "description": "Create a calming routine before bed to improve sleep quality and relaxation."
+  },
+  {
+    "title": "Stay Positive",
+    "description": "Maintain a positive mindset by focusing on solutions rather than problems to improve resilience."
   }
 ]

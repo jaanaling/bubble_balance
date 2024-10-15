@@ -72,17 +72,34 @@ class UserDataRepository {
 
   Future<void> saveUserAnalytics(UserAnalytics analytics) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String analyticsJson = jsonEncode(analytics.toMap());
-    await prefs.setString('user_analytics', analyticsJson);
+    final String? existingAnalyticsJson = prefs.getString('user_analytics');
+
+    List<UserAnalytics> analyticsList = [];
+
+    if (existingAnalyticsJson != null) {
+      final List<dynamic> existingAnalyticsList =
+          jsonDecode(existingAnalyticsJson) as List<dynamic>;
+      analyticsList = existingAnalyticsList
+          .map((item) => UserAnalytics.fromMap(item as Map<String, dynamic>))
+          .toList();
+    }
+
+    analyticsList.add(analytics);
+
+    final String newAnalyticsJson =
+        jsonEncode(analyticsList.map((a) => a.toMap()).toList());
+    await prefs.setString('user_analytics', newAnalyticsJson);
   }
 
-  Future<UserAnalytics?> getUserAnalytics() async {
+  Future<List<UserAnalytics>?> getUserAnalytics() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? analyticsJson = prefs.getString('user_analytics');
     if (analyticsJson != null) {
-      return UserAnalytics.fromMap(
-        jsonDecode(analyticsJson) as Map<String, dynamic>,
-      );
+      final List<dynamic> analyticsList =
+          jsonDecode(analyticsJson) as List<dynamic>;
+      return analyticsList
+          .map((item) => UserAnalytics.fromMap(item as Map<String, dynamic>))
+          .toList();
     }
     return null;
   }
