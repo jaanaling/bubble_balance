@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:bubblebalance/routes/route_value.dart';
 import 'package:bubblebalance/ui_kit/base_container/base_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -44,7 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Material(
       color: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.only(bottom:  125, top: 70),
+        padding: const EdgeInsets.only(bottom: 125, top: 70),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 36),
@@ -70,16 +72,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 trackColor: Colors.white,
                 thumbColor: notificationsEnabled ? Colors.green : Colors.red,
                 value: notificationsEnabled,
-                onChanged: (bool value) {
-                  setState(() {
-                    notificationsEnabled = value;
-                  });
+                onChanged: (bool value) async {
                   if (notificationsEnabled) {
-                    //   scheduleDailyReset();
-                    prefs.setBool('notificationsEnabled', true);
+                    FirebaseMessaging instance = FirebaseMessaging.instance;
+
+                    final settings = await instance.requestPermission(
+                        alert: true, badge: true, sound: true);
+                    if (settings.authorizationStatus ==
+                        AuthorizationStatus.authorized) {
+                      final prefs = await SharedPreferences.getInstance();
+
+                      await prefs.setBool(
+                          'notificationsEnabled', notificationsEnabled);
+                      setState(() {
+                        notificationsEnabled = value;
+                      });
+                    } else {
+                      showNotificationPermissionDialog(context);
+                    }
                   } else {
-                    cancelNotifications();
-                    prefs.setBool('notificationsEnabled', false);
+                    setState(() {
+                      notificationsEnabled = value;
+                    });
+                    final prefs = await SharedPreferences.getInstance();
+
+                    await prefs.setBool(
+                        'notificationsEnabled', notificationsEnabled);
                   }
                 },
               ),
@@ -99,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         loadInitialData();
                         context.read<TestBloc>().add(LoadTestsEvent());
                         context.read<LifeAspectBloc>().add(LoadAspects());
-           
+
                         Navigator.pop(context);
                       }),
                   CupertinoDialogAction(
@@ -132,19 +150,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 56),
               child: Text(
-                  'Pravicy policy',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: CupertinoColors.activeBlue,
-                    fontSize: 18,
-                  ),
+                'Pravicy policy',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: CupertinoColors.activeBlue,
+                  fontSize: 18,
                 ),
-                
-              
+              ),
             ),
           ),
         ]),
       ),
     );
   }
+}
+
+void showNotificationPermissionDialog(BuildContext context) {
+  showCupertinoDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoAlertDialog(
+        title: Text('Enable Notifications'),
+        content:
+            Text('Please enable notifications in the settings to continue.'),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          CupertinoDialogAction(
+            child: Text('Open Settings'),
+            onPressed: () async {
+              const url = 'app-settings:';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                print('Could not open settings.');
+              }
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

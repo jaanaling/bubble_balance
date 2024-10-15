@@ -11,6 +11,8 @@ import 'package:bubblebalance/feature/aspects/repository/user_data_repository.da
 import 'package:timezone/data/latest.dart' as tz;
 import 'core/dependency_injection.dart';
 import 'feature/app/presentation/app_root.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -28,12 +30,29 @@ Future<void> main() async {
 
   await resetDailyScores();
 
+  await Firebase.initializeApp();
+
+  final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const AppRoot());
+
+
+  runApp(
+    const AppRoot(),
+  );
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  final prefs = await SharedPreferences.getInstance();
+  final notificationsEnabled = prefs.getBool('notificationsEnabled') ?? true;
+  if (!notificationsEnabled) {
+    return;
+  }
 }
 
 Future<void> requestIOSPermissions() async {
@@ -88,8 +107,4 @@ Future<void> resetDailyScores() async {
 
     await prefs.setString('last_reset_week_date', currentDate);
   }
-}
-
-Future<void> cancelNotifications() async {
-  await flutterLocalNotificationsPlugin.cancelAll();
 }

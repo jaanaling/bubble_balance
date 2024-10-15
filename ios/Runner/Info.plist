@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>bubblebalance</string>
+	<string>Balance Bubble</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -45,5 +45,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+    	<array>
+    	    <string>fetch</string>
+    	    <string>remote-notification</string>
+    	</array>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This identifier will be used to display personalized advertisements.</string>
 </dict>
 </plist>
