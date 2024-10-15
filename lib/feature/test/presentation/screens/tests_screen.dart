@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
-import 'package:plinko/core/utils/icon_provider.dart';
-import 'package:plinko/core/utils/log.dart';
 import 'package:plinko/feature/test/bloc/test_bloc.dart';
 import 'package:plinko/routes/route_value.dart';
 
@@ -23,9 +21,8 @@ class _TestsScreenState extends State<TestsScreen> {
     return BlocBuilder<TestBloc, TestState>(
       builder: (context, state) {
         if (state is TestInitial) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is TestLoadedState) {
-   
           final completedTests = state.tests.where((test) {
             return test.isComplete;
           }).toList();
@@ -50,33 +47,81 @@ class _TestsScreenState extends State<TestsScreen> {
                   return Card(
                     elevation: 4,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(37.5),
+                      borderRadius: BorderRadius.circular(13),
                     ),
-                    color: isCompleted ? Colors.green : Color(0xFFEFEFEF),
+                    color: isCompleted ? Colors.green.shade100 : const Color(0xFFEFEFEF),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        title: Text(test.title),
-                        subtitle: Text(test.description),
-                        trailing: ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<TestBloc>()
-                                .add(SetCurrentTestEvent(test));
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  test.title,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Mon',
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  test.description,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mon',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Gap(16),
+                          InkWell(
+                            onTap: () {
+                              context.read<TestBloc>().add(SetCurrentTestEvent(test));
 
-                            isCompleted
-                                ? context.push(
-                                    "${RouteValue.tests.path}/${RouteValue.testResult.path}",
-                                    extra: test,
-                                  )
-                                : context.push(
-                                    "${RouteValue.tests.path}/${RouteValue.test.path}",
-                                    extra: test,
-                                  );
-                          },
-                          child: Text('Start'),
-                        ),
-                      ),
+                              isCompleted
+                                  ? context.push(
+                                '${RouteValue.tests.path}/${RouteValue.testResult.path}',
+                                extra: test,
+                              )
+                                  : context.push(
+                                '${RouteValue.tests.path}/${RouteValue.test.path}',
+                                extra: test,
+                              );
+                            },
+                            borderRadius: BorderRadius.circular(25),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFFF5C660),
+                                    Color(0xFFF264CE),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 11),
+                                  child: Text(
+                                    'Start',
+                                    style: TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                      fontFamily: 'Mon',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ),
                   );
                 },
@@ -97,7 +142,7 @@ class _TestsScreenState extends State<TestsScreen> {
             ],
           );
         } else {
-          return Center(child: Text('Error loading tests'));
+          return const Center(child: Text('Error loading tests'));
         }
       },
     );
@@ -137,8 +182,8 @@ class _TestsScreenState extends State<TestsScreen> {
         child: Text(
           label,
           style: _selectedIndex == index
-              ? TextStyle(fontSize: 24, color: Colors.white)
-              : TextStyle(fontSize: 24),
+              ? const TextStyle(fontSize: 24, color: Colors.white,  fontFamily: 'Mon',)
+              : const TextStyle(fontSize: 24,  fontFamily: 'Mon',),
           textAlign: TextAlign.center,
         ),
       ),
