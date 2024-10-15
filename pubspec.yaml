@@ -25,8 +25,12 @@ dependencies:
   flutter_svg: ^2.0.10+1
   uuid: ^4.5.1
   flutter_datetime_picker_plus: ^2.2.0
+  firebase_core: ^3.2.0
+  firebase_messaging: ^15.0.3
   intl: ^0.19.0
   syncfusion_flutter_charts: ^27.1.48
+  advertising_id: ^2.7.1
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
