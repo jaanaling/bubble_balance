@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
 
-import 'package:plinko/feature/test/models/test_outcome.dart';
-import 'package:plinko/feature/test/models/test_question.dart';
-import 'package:plinko/feature/test/models/test_result.dart';
+import 'package:bubblebalance/feature/test/models/test_outcome.dart';
+import 'package:bubblebalance/feature/test/models/test_question.dart';
+import 'package:bubblebalance/feature/test/models/test_result.dart';
 
 class PsychologicalTest {
   final String id;

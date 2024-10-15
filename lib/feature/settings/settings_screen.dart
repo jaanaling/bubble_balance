@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/utils/init_data.dart';
-import 'package:plinko/feature/test/bloc/test_bloc.dart';
-import 'package:plinko/main.dart';
-import 'package:plinko/routes/route_value.dart';
-import 'package:plinko/ui_kit/base_container/base_container.dart';
+import 'package:bubblebalance/core/utils/init_data.dart';
+import 'package:bubblebalance/feature/aspects/bloc/aspect_bloc.dart';
+import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
+import 'package:bubblebalance/main.dart';
+import 'package:bubblebalance/routes/route_value.dart';
+import 'package:bubblebalance/ui_kit/base_container/base_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart';
 
@@ -97,6 +98,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         prefs.clear();
                         loadInitialData();
                         context.read<TestBloc>().add(LoadTestsEvent());
+                        context.read<LifeAspectBloc>().add(LoadAspects());
+           
                         Navigator.pop(context);
                       }),
                   CupertinoDialogAction(

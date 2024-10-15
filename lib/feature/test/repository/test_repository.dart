@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:plinko/core/utils/log.dart';
-import 'package:plinko/feature/test/models/psychological_test.dart';
-import 'package:plinko/feature/test/models/test_outcome.dart';
-import 'package:plinko/feature/test/models/test_result.dart';
+import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/test/models/psychological_test.dart';
+import 'package:bubblebalance/feature/test/models/test_outcome.dart';
+import 'package:bubblebalance/feature/test/models/test_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TestRepository {

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'package:plinko/feature/aspects/models/task.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
 
 class LifeAspect extends Equatable {
   final String name;

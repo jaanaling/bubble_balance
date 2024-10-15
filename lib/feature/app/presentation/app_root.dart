@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:plinko/feature/aspects/bloc/aspect_bloc.dart';
-import 'package:plinko/feature/test/bloc/test_bloc.dart';
+import 'package:bubblebalance/feature/aspects/bloc/aspect_bloc.dart';
+import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
 
 import '../../../routes/go_router_config.dart';
 

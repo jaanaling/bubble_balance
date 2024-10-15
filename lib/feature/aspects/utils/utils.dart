@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plinko/core/utils/log.dart';
+import 'package:bubblebalance/core/utils/log.dart';
 
 Color getColorFromScores(double completedPoints, double expectedPoints) {
   // Если ожидаемое количество очков равно нулю, возвращаем красный

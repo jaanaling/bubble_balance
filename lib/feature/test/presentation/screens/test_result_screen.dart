@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/dependency_injection.dart';
-import 'package:plinko/core/utils/icon_provider.dart';
-import 'package:plinko/core/utils/log.dart';
-import 'package:plinko/feature/test/bloc/test_bloc.dart';
-import 'package:plinko/feature/test/models/psychological_test.dart';
-import 'package:plinko/feature/test/repository/test_repository.dart';
-import 'package:plinko/routes/route_value.dart';
-import 'package:plinko/ui_kit/app_icon/widget/app_icon.dart';
+import 'package:bubblebalance/core/dependency_injection.dart';
+import 'package:bubblebalance/core/utils/icon_provider.dart';
+import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
+import 'package:bubblebalance/feature/test/models/psychological_test.dart';
+import 'package:bubblebalance/feature/test/repository/test_repository.dart';
+import 'package:bubblebalance/routes/route_value.dart';
+import 'package:bubblebalance/ui_kit/app_icon/widget/app_icon.dart';
 
 class TestResultScreen extends StatelessWidget {
   final PsychologicalTest test;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:plinko/feature/aspects/models/life_aspect.dart';
-import 'package:plinko/feature/aspects/models/task.dart';
+import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LifeAspectRepository {

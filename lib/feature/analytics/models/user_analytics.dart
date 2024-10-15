@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'package:plinko/feature/aspects/models/user.dart';
+import 'package:bubblebalance/feature/aspects/models/user.dart';
 
 class UserAnalytics extends Equatable {
   final User user;

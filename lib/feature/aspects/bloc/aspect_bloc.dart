@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plinko/core/dependency_injection.dart';
-import 'package:plinko/core/utils/log.dart';
-import 'package:plinko/feature/aspects/models/life_aspect.dart';
-import 'package:plinko/feature/aspects/models/task.dart';
-import 'package:plinko/feature/aspects/models/user.dart';
-import 'package:plinko/feature/analytics/models/user_analytics.dart';
-import 'package:plinko/feature/aspects/repository/life_aspect_repository.dart';
-import 'package:plinko/feature/aspects/repository/user_data_repository.dart';
+import 'package:bubblebalance/core/dependency_injection.dart';
+import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
+import 'package:bubblebalance/feature/aspects/models/user.dart';
+import 'package:bubblebalance/feature/analytics/models/user_analytics.dart';
+import 'package:bubblebalance/feature/aspects/repository/life_aspect_repository.dart';
+import 'package:bubblebalance/feature/aspects/repository/user_data_repository.dart';
 import 'package:uuid/uuid.dart';
 
 part 'aspect_events.dart';

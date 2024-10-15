@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/utils/icon_provider.dart';
-import 'package:plinko/feature/aspects/bloc/aspect_bloc.dart';
-import 'package:plinko/feature/aspects/models/task.dart';
+import 'package:bubblebalance/core/utils/icon_provider.dart';
+import 'package:bubblebalance/feature/aspects/bloc/aspect_bloc.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
 
 class TasksScreen extends StatelessWidget {
   final List<Task> tasks;
@@ -66,12 +66,14 @@ class TasksScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    tasks[index].name,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
+                  Expanded(
+                    child: Text(
+                      tasks[index].name,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                      ),
                     ),
                   ),
                 ],

@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/dependency_injection.dart';
-import 'package:plinko/core/utils/log.dart';
-import 'package:plinko/feature/test/models/psychological_test.dart';
-import 'package:plinko/feature/test/repository/test_repository.dart';
-import 'package:plinko/routes/route_value.dart';
+import 'package:bubblebalance/core/dependency_injection.dart';
+import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/test/models/psychological_test.dart';
+import 'package:bubblebalance/feature/test/repository/test_repository.dart';
+import 'package:bubblebalance/routes/route_value.dart';
 
 part 'test_event.dart';
 part 'test_state.dart';

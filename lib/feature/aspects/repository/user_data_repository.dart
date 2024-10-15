@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:plinko/core/utils/log.dart';
-import 'package:plinko/feature/aspects/models/task.dart';
-import 'package:plinko/feature/aspects/models/user.dart';
-import 'package:plinko/feature/aspects/models/life_aspect.dart';
-import 'package:plinko/feature/analytics/models/user_analytics.dart';
+import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
+import 'package:bubblebalance/feature/aspects/models/user.dart';
+import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
+import 'package:bubblebalance/feature/analytics/models/user_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 

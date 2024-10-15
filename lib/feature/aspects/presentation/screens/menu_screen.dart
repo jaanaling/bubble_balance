@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:plinko/feature/aspects/bloc/aspect_bloc.dart';
-import 'package:plinko/feature/aspects/models/task.dart';
-import 'package:plinko/feature/aspects/utils/utils.dart';
-import 'package:plinko/routes/route_value.dart';
-import 'package:plinko/ui_kit/base_container/base_container.dart';
+import 'package:bubblebalance/feature/aspects/bloc/aspect_bloc.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
+import 'package:bubblebalance/feature/aspects/utils/utils.dart';
+import 'package:bubblebalance/routes/route_value.dart';
+import 'package:bubblebalance/ui_kit/base_container/base_container.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -20,7 +20,7 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
   int pageIndex = 0;
-  String day = '${DateTime.now().weekday} ';
+  String day = '${DateTime.now().weekday}';
   final PageController _pageController = PageController();
   final List<String> weekdays = [
     'Monday',
@@ -55,58 +55,62 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
         ),
-
-        if(_selectedIndex==1)
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: CupertinoButton(
-            onPressed: () {
-              showCupertinoModalPopup(
-                context: context,
-                builder: (context) {
-                  return Container(
-                    height: 250,
-                    color: CupertinoColors.systemBackground,
-                    child: CupertinoPicker(
-                      itemExtent: 32.0,
-                      onSelectedItemChanged: (int index) {
-                        setState(() {
-                          day = '${index + 1}';
-                        });
-                      },
-                      children: weekdays.map((day) => Text(day)).toList(),
+        if (_selectedIndex == 1)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: CupertinoButton(
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      height: 250,
+                      color: CupertinoColors.systemBackground,
+                      child: CupertinoPicker(
+                        itemExtent: 32.0,
+                        onSelectedItemChanged: (int index) {
+                          setState(() {
+                            day = '${index + 1}';
+                          });
+                        },
+                        children: weekdays
+                            .map((day) => Text(day,
+                                style: TextStyle(
+                                    color: CupertinoColors.activeBlue)))
+                            .toList(),
+                      ),
+                    );
+                  },
+                );
+              },
+              color: Color(0xFFEFEFEF),
+              padding: EdgeInsets.zero,
+              borderRadius: BorderRadius.circular(15),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      getFormattedDate(day),
+                      style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                        fontFamily: 'Mon',
+                      ),
                     ),
-                  );
-                },
-              );
-            },
-            color: Color(0xFFEFEFEF),
-            padding: EdgeInsets.zero,
-            borderRadius: BorderRadius.circular(15),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    getFormattedDate(day),
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                      fontFamily: 'Mon',
-                    ),
-                  ),
-                  const Gap(20),
-                  const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Color(0xFF939393),
-                  )
-                ],
+                    const Gap(20),
+                    const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Color(0xFF939393),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
         BlocBuilder<LifeAspectBloc, LifeAspectState>(
           builder: (context, state) {
             if (state is AspectsLoaded) {
@@ -121,10 +125,21 @@ class _MenuScreenState extends State<MenuScreen> {
                   itemCount: state.aspects.length,
                   itemBuilder: (context, index) {
                     final aspect = state.aspects[index];
-                    final completedTasks = state.user.completedTasksToday;
-                    final plannedTasks =
-                        state.user.plannedTasksForWeek[day] ?? [];
-                    final overdueTasks = state.user.overdueTasks[day] ?? [];
+                    final List<IdentifiedTask> completedTasks =
+                        _selectedIndex == 0 ||
+                                day == "${DateTime.now().weekday}"
+                            ? state.user.completedTasksToday
+                            : [];
+                    final plannedTasks = state.user.plannedTasksForWeek[
+                            _selectedIndex == 1
+                                ? day
+                                : "${DateTime.now().weekday}"] ??
+                        [];
+                    final overdueTasks = state.user.overdueTasks[
+                            _selectedIndex == 1
+                                ? day
+                                : "${DateTime.now().weekday}"] ??
+                        [];
 
                     final tasks = [
                       ...completedTasks,
@@ -145,11 +160,27 @@ class _MenuScreenState extends State<MenuScreen> {
                           (t) => t.task.aspectScores[aspect.name] ?? 0,
                         );
 
+                    final plannedAspectedScores =
+                        state.user.plannedTasksForWeek[day]
+                            ?.where(
+                              (t) =>
+                                  t.task.aspectScores.containsKey(aspect.name),
+                            )
+                            .map(
+                              (t) => t.task.aspectScores[aspect.name] ?? 0,
+                            );
+
                     final Color color = aspectScores.isNotEmpty
                         ? getColorFromScores(
                             aspectScores.reduce(
-                              (value, element) => value + element,
-                            ),
+                                  (value, element) => value + element,
+                                ) +
+                                (plannedAspectedScores != null &&
+                                        plannedAspectedScores.isNotEmpty
+                                    ? plannedAspectedScores.reduce(
+                                        (value, element) => value + element,
+                                      )
+                                    : 0),
                             state.aspects[index].optimalScore,
                           ).withOpacity(1.0)
                         : const Color(0xFFD72E58);
@@ -290,13 +321,15 @@ class _MenuScreenState extends State<MenuScreen> {
                                     ),
                                   ),
                                 ),
-                                Text(
-                                  tasks[index].task.name,
-                                  style: const TextStyle(
-                                    fontSize: 19,
-                                    color: Colors.black,
+                                Expanded(
+                                  child: Text(
+                                    tasks[index].task.name,
+                                    style: const TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                                 Row(
                                   children: [

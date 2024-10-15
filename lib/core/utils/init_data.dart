@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:plinko/core/dependency_injection.dart';
-import 'package:plinko/feature/aspects/models/life_aspect.dart';
+import 'package:bubblebalance/core/dependency_injection.dart';
+import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
 
-import 'package:plinko/feature/aspects/models/task.dart';
-import 'package:plinko/feature/test/models/psychological_test.dart'; // Импорт модели психологических тестов
-import 'package:plinko/feature/aspects/repository/life_aspect_repository.dart';
-import 'package:plinko/feature/test/repository/test_repository.dart';
+import 'package:bubblebalance/feature/aspects/models/task.dart';
+import 'package:bubblebalance/feature/test/models/psychological_test.dart'; // Импорт модели психологических тестов
+import 'package:bubblebalance/feature/aspects/repository/life_aspect_repository.dart';
+import 'package:bubblebalance/feature/test/repository/test_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> loadInitialData() async {

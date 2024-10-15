@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/utils/icon_provider.dart';
-import 'package:plinko/routes/route_value.dart';
+import 'package:bubblebalance/core/utils/icon_provider.dart';
+import 'package:bubblebalance/routes/route_value.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,12 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: LinearProgressIndicator(
-              minHeight: 10,
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(Color(0xFF320072)),
-              backgroundColor: Colors.grey[300],
-            ),
+            child: const CupertinoActivityIndicator(
+                color: Colors.black12,
+                radius: 44,
+              ),
           ),
         ),
       ],

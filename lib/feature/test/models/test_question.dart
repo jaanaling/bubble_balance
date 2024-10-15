@@ -1,4 +1,4 @@
-import 'package:plinko/feature/test/models/test_answer.dart';
+import 'package:bubblebalance/feature/test/models/test_answer.dart';
 
 class TestQuestion {
   final String id;

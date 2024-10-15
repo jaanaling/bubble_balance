@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "plinko",
+            "name": "bubblebalance",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "plinko (profile mode)",
+            "name": "bubblebalance (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "plinko (release mode)",
+            "name": "bubblebalance (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

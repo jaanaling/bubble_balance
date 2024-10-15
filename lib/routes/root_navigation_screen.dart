@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/utils/icon_provider.dart';
+import 'package:bubblebalance/core/utils/icon_provider.dart';
 
 import '../ui_kit/bottom_bar/bottom_bar.dart';
 
@@ -18,7 +18,7 @@ class RootNavigationScreen extends StatefulWidget {
 }
 
 class _RootNavigationScreenState extends State<RootNavigationScreen> {
-  int currentIndex = 1;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {

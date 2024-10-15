@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plinko/core/utils/log.dart';
-import 'package:plinko/feature/test/bloc/test_bloc.dart';
-import 'package:plinko/feature/test/models/psychological_test.dart';
-import 'package:plinko/routes/route_value.dart';
+import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
+import 'package:bubblebalance/feature/test/models/psychological_test.dart';
+import 'package:bubblebalance/routes/route_value.dart';
 
 class TestScreen extends StatelessWidget {
   const TestScreen({super.key});

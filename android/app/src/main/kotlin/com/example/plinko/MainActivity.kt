@@ -1,4 +1,4 @@
-package com.example.plinko
+package com.example.bubblebalance
 
 import io.flutter.embedding.android.FlutterActivity
 

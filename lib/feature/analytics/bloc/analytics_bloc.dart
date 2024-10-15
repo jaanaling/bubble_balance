@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:plinko/core/dependency_injection.dart';
-import 'package:plinko/feature/analytics/models/user_analytics.dart';
-import 'package:plinko/feature/test/repository/test_repository.dart';
-import 'package:plinko/feature/aspects/repository/user_data_repository.dart';
+import 'package:bubblebalance/core/dependency_injection.dart';
+import 'package:bubblebalance/feature/analytics/models/user_analytics.dart';
+import 'package:bubblebalance/feature/test/repository/test_repository.dart';
+import 'package:bubblebalance/feature/aspects/repository/user_data_repository.dart';
 
 part 'analytics_event.dart';
 part 'analytics_state.dart';

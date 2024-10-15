@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
-import 'package:plinko/feature/test/bloc/test_bloc.dart';
-import 'package:plinko/routes/route_value.dart';
+import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
+import 'package:bubblebalance/routes/route_value.dart';
 
 class TestsScreen extends StatefulWidget {
   const TestsScreen({super.key});

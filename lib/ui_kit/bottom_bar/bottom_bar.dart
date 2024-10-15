@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import 'dart:math' as math;
 
-import 'package:plinko/core/utils/icon_provider.dart';
-import 'package:plinko/routes/route_value.dart';
-import 'package:plinko/ui_kit/app_icon/widget/app_icon.dart';
+import 'package:bubblebalance/core/utils/icon_provider.dart';
+import 'package:bubblebalance/routes/route_value.dart';
+import 'package:bubblebalance/ui_kit/app_icon/widget/app_icon.dart';
 
 class BottomBar extends StatefulWidget {
   final int selectedIndex;
@@ -19,7 +19,7 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   final List<double> _initialAngles = [0, -18, 0, 0, 0];
 
@@ -142,6 +142,9 @@ class _BottomBarState extends State<BottomBar> {
   }) {
     return IconButton(
       onPressed: onPressed,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      splashRadius: 20,
       icon: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
