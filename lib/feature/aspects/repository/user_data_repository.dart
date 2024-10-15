@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:bubblebalance/core/dependency_injection.dart';
 import 'package:bubblebalance/core/utils/log.dart';
+import 'package:bubblebalance/feature/analytics/bloc/analytics_bloc.dart';
 import 'package:bubblebalance/feature/aspects/models/task.dart';
 import 'package:bubblebalance/feature/aspects/models/user.dart';
 import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
@@ -13,9 +15,11 @@ class UserDataRepository {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String userJson = user.toJson();
     logger.d(userJson);
+    
     await prefs.setString('user', userJson);
     await saveUserAnalytics(UserAnalytics(
         user: user, date: DateFormat('yyyy-MM-dd').format(DateTime.now())));
+    locator<AnalyticsBloc>()..add(LoadAnalyticsEvent());
   }
 
   Future<User?> getUser() async {

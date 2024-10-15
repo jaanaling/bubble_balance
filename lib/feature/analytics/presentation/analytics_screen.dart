@@ -1,3 +1,4 @@
+import 'package:bubblebalance/core/dependency_injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +23,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   UserAnalytics _getAnalyticsForDate(
       DateTime date, List<UserAnalytics> analyticsData) {
     return analyticsData.firstWhere(
-      (data) =>
-          data.date ==
-          DateFormat('yyyy-MM-dd').format(date),
+      (data) => data.date == DateFormat('yyyy-MM-dd').format(date),
       orElse: () => UserAnalytics(
           user: User(
               name: '',
@@ -32,7 +31,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               plannedTasksForWeek: {},
               expectedScores: {},
               overdueTasks: {}),
-          date:  DateFormat('yyyy-MM-dd').format(date)),
+          date: DateFormat('yyyy-MM-dd').format(date)),
     );
   }
 
@@ -44,144 +43,167 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (context) => AnalyticsBloc()..add(LoadAnalyticsEvent()),
+        create: (context) =>
+            locator<AnalyticsBloc>()..add(LoadAnalyticsEvent()),
         child: BlocBuilder<AnalyticsBloc, AnalyticsState>(
           builder: (context, state) {
             if (state is AnalyticsLoadedState) {
-              Set<String> aspects = {};
-              Map<String, double> aspectScores = {};
-              Map<String, double> overdueAspectScores = {};
+              final Set<String> aspects = {};
+              final Map<String, double> aspectScores = {};
+              final Map<String, double> waitingScore = {};
+
               final selectedAnalytics =
                   _getAnalyticsForDate(selectedDate, state.analytics);
-              final completedTasks =
-                  selectedAnalytics.user.completedTasksToday;
-              final overdueTasks = selectedAnalytics
-                      .user
-                      .overdueTasks['${selectedDate.weekday}'] ?? []
-                      ;
-      
-              for(final asp in completedTasks){
+              final completedTasks = selectedAnalytics.user.completedTasksToday;
+
+              for (final asp in completedTasks) {
                 aspects.addAll(asp.task.aspectScores.keys);
               }
+
               for (final task in completedTasks) {
                 for (final aspect in task.task.aspectScores.keys) {
                   aspectScores.update(
                     aspect,
-                        (existingScore) => existingScore + task.task.aspectScores[aspect]!,
+                    (existingScore) =>
+                        existingScore + task.task.aspectScores[aspect]!,
                     ifAbsent: () => task.task.aspectScores[aspect]!,
                   );
                 }
               }
-      
-              for (final task in overdueTasks) {
-                for (final aspect in task.task.aspectScores.keys) {
-                  overdueAspectScores.update(
-                    aspect,
-                        (existingScore) => existingScore + task.task.aspectScores[aspect]!,
-                    ifAbsent: () => task.task.aspectScores[aspect]!,
-                  );
+
+              for (final asp in state.aspects) {
+                if (aspectScores.containsKey(asp.name)) {
+                  waitingScore[asp.name] = asp.optimalScore;
                 }
               }
+
               return Column(
-                children: [ Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: CupertinoButton(
-                    onPressed: () {
-                      showCupertinoModalPopup(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: 250,
-                            color: CupertinoColors.systemBackground
-                                .resolveFrom(context),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    CupertinoButton(
-                                      child: const Text('Done'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: CupertinoButton(
+                      onPressed: () {
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                              height: 250,
+                              color: CupertinoColors.systemBackground
+                                  .resolveFrom(context),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CupertinoButton(
+                                        child: const Text('Done'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 197,
+                                    child: CupertinoDatePicker(
+                                      initialDateTime: selectedDate,
+                                      mode: CupertinoDatePickerMode.date,
+                                      onDateTimeChanged: (DateTime date) {
+                                        setState(() {
+                                          selectedDate = date;
+                                        });
                                       },
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 197,
-                                  child: CupertinoDatePicker(
-                                    initialDateTime: selectedDate,
-                                    mode: CupertinoDatePickerMode.date,
-                                    onDateTimeChanged: (DateTime date) {
-                                      setState(() {
-                                        selectedDate = date;
-                                      });
-                                    },
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      color: Color(0xFFEFEFEF),
+                      padding: EdgeInsets.zero,
+                      borderRadius: BorderRadius.circular(15),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              getFormattedDate(selectedDate),
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                                fontFamily: 'Mon',
+                              ),
                             ),
-                          );
-                        },
-                      );
-                    },
-                    color: Color(0xFFEFEFEF),
-                    padding: EdgeInsets.zero,
-                    borderRadius: BorderRadius.circular(15),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            getFormattedDate(selectedDate),
-                            style: TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black,
-                              fontFamily: 'Mon',
-                            ),
-                          ),
-                          const Gap(20),
-                          const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xFF939393),
-                          )
-                        ],
+                            const Gap(20),
+                            const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Color(0xFF939393),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
                   Expanded(
                     child: PageView.builder(
                       itemCount: aspects.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(top: 32.0, bottom: 80.0),
+                          padding:
+                              const EdgeInsets.only(top: 32.0, bottom: 130),
                           child: Column(
                             children: [
-                    
-                    
                               Gap(16),
-                              Text(aspects.elementAt(index), style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
+                              Text(
+                                aspects.elementAt(index),
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w500),
+                              ),
                               Gap(16),
                               Expanded(
                                 child: SfCircularChart(
+                                  legend: Legend(
+                                    isVisible: true,
+                                    position: LegendPosition.bottom,
+                                  ),
                                   series: <CircularSeries>[
                                     PieSeries<_TaskData, String>(
                                       dataSource: [
-                                        _TaskData('Выполнено', aspectScores[aspects.elementAt(index)] ?? 0),
-                                        _TaskData('Просрочено', overdueAspectScores[aspects.elementAt(index)] ?? 0),
+                                        _TaskData(
+                                          'Completed',
+                                          aspectScores[
+                                                  aspects.elementAt(index)] ??
+                                              0,
+                                        ),
+                                        _TaskData(
+                                          'To optimal',
+                                          waitingScore[aspects
+                                                      .elementAt(index)] !=
+                                                  null
+                                              ? waitingScore[aspects
+                                                      .elementAt(index)]! -
+                                                  (aspectScores[aspects
+                                                          .elementAt(index)] ??
+                                                      0)
+                                              : 0,
+                                        ),
                                       ],
-                                      xValueMapper: (_TaskData data, _) => data.taskType,
-                                      yValueMapper: (_TaskData data, _) => data.taskCount,
-                                      dataLabelSettings: DataLabelSettings(isVisible: true),
+                                      xValueMapper: (_TaskData data, _) =>
+                                          data.taskType,
+                                      yValueMapper: (_TaskData data, _) =>
+                                          data.taskCount,
+                                      dataLabelSettings:
+                                          DataLabelSettings(isVisible: true),
                                     ),
                                   ],
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         );

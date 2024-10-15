@@ -5,16 +5,21 @@ class AnalyticsState extends Equatable {
   List<Object> get props => [];
 }
 
-class AnalyticsInitialState extends AnalyticsState {  @override
-List<Object> get props => [];}
+class AnalyticsInitialState extends AnalyticsState {
+  @override
+  List<Object> get props => [];
+}
 
-class AnalyticsLoadingState extends AnalyticsState {  @override
-List<Object> get props => [];}
+class AnalyticsLoadingState extends AnalyticsState {
+  @override
+  List<Object> get props => [];
+}
 
 class AnalyticsLoadedState extends AnalyticsState {
   final List<UserAnalytics> analytics;
+  final List<LifeAspect> aspects;
 
-  AnalyticsLoadedState(this.analytics);
+  AnalyticsLoadedState(this.analytics, this.aspects);
   @override
   List<Object> get props => [analytics];
 }

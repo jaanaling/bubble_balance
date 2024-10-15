@@ -138,13 +138,14 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
         },
         expectedScores: expectedScores,
       );
-
-      await userRepository.saveUser(updatedUser);
+      
+      await userRepository.checkAndAddOverdueTasks(updatedUser.plannedTasksForWeek);
+     
       _emitUpdatedState(
         emit,
         currentState.aspects,
         currentState.tasks,
-        updatedUser,
+        await userRepository.getUser() ?? updatedUser ,
       );
     }
   }
