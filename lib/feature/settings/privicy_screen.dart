@@ -37,7 +37,7 @@ class _PrivicyScreenState extends State<PrivicyScreen> {
               child: WebViewWidget(
                 controller: _controller
                   ..loadRequest(
-                     Uri.parse("https://moodbubblesa.com/privacy.html"))
+                     Uri.parse("https://bubblebalancea.com/privacy.html"))
                   ..setBackgroundColor(
                     Colors.white,
                   ),

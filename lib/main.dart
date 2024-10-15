@@ -2,14 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:bubblebalance/core/utils/log.dart';
 import 'package:bubblebalance/feature/analytics/models/user_analytics.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bubblebalance/core/utils/init_data.dart';
 import 'package:bubblebalance/feature/aspects/models/user.dart';
 import 'package:bubblebalance/feature/aspects/repository/user_data_repository.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 import 'core/dependency_injection.dart';
 import 'feature/app/presentation/app_root.dart';
 
@@ -64,11 +63,11 @@ Future<void> resetDailyScores() async {
     final User? user = await locator<UserDataRepository>().getUser();
 
     if (user != null) {
-      await locator<UserDataRepository>()
-          .saveUserAnalytics(UserAnalytics(user: user, date: DateTime.now()));
+      await locator<UserDataRepository>().saveUserAnalytics(UserAnalytics(
+          user: user, date: DateFormat('yyyy-MM-dd').format(DateTime.now()),),);
       final updatedUser = User(
         name: user.name,
-        completedTasksToday: [],
+        completedTasksToday: const [],
         plannedTasksForWeek: user.plannedTasksForWeek,
         expectedScores: user.expectedScores,
         overdueTasks: user.overdueTasks,

@@ -4,6 +4,7 @@ import 'package:bubblebalance/feature/aspects/models/task.dart';
 import 'package:bubblebalance/feature/aspects/models/user.dart';
 import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
 import 'package:bubblebalance/feature/analytics/models/user_analytics.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,6 +14,8 @@ class UserDataRepository {
     final String userJson = user.toJson();
     logger.d(userJson);
     await prefs.setString('user', userJson);
+    await saveUserAnalytics(UserAnalytics(
+        user: user, date: DateFormat('yyyy-MM-dd').format(DateTime.now())));
   }
 
   Future<User?> getUser() async {
@@ -83,8 +86,12 @@ class UserDataRepository {
           .map((item) => UserAnalytics.fromMap(item as Map<String, dynamic>))
           .toList();
     }
-
-    analyticsList.add(analytics);
+    if (analyticsList.where((t) => t.date == analytics.date).isNotEmpty) {
+      analyticsList[analyticsList.indexWhere((t) => t.date == analytics.date)] =
+          analytics;
+    } else {
+      analyticsList.add(analytics);
+    }
 
     final String newAnalyticsJson =
         jsonEncode(analyticsList.map((a) => a.toMap()).toList());

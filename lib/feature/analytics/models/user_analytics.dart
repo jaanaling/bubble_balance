@@ -7,7 +7,7 @@ import 'package:bubblebalance/feature/aspects/models/user.dart';
 
 class UserAnalytics extends Equatable {
   final User user;
-  final DateTime date;
+  final String date;
 
   UserAnalytics({
     required this.user,
@@ -25,14 +25,14 @@ class UserAnalytics extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'user': user.toMap(),
-      'date': date.millisecondsSinceEpoch,
+      'date': date,
     };
   }
 
   factory UserAnalytics.fromMap(Map<String, dynamic> map) {
     return UserAnalytics(
       user: User.fromMap(map['user'] as Map<String, dynamic>),
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: map['date'] as String,
     );
   }
 }

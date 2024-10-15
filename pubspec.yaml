@@ -26,6 +26,7 @@ dependencies:
   uuid: ^4.5.1
   flutter_datetime_picker_plus: ^2.2.0
   intl: ^0.19.0
+  syncfusion_flutter_charts: ^27.1.48
 
 dev_dependencies:
   flutter_test:
