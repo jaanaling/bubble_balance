@@ -8,14 +8,14 @@ import 'package:bubblebalance/feature/aspects/models/task.dart';
 
 class User extends Equatable {
   final String name;
-  List<IdentifiedTask> completedTasksToday;
+  Map<String, List<IdentifiedTask>> completedTasksWeek;
   Map<String, List<IdentifiedTask>> plannedTasksForWeek;
+  Map<String, List<IdentifiedTask>> overdueTasks;
   Map<LifeAspect, double> expectedScores;
-  Map<String, List<IdentifiedTask>> overdueTasks; // Новое поле для просроченных тасков
 
   User({
     required this.name,
-    required this.completedTasksToday,
+    required this.completedTasksWeek,
     required this.plannedTasksForWeek,
     required this.expectedScores,
     required this.overdueTasks, // Инициализация нового поля
@@ -24,7 +24,7 @@ class User extends Equatable {
   @override
   List<Object> get props => [
         name,
-        completedTasksToday,
+        completedTasksWeek,
         plannedTasksForWeek,
         expectedScores,
         overdueTasks, // Добавление в props
@@ -33,7 +33,12 @@ class User extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'completedTasksToday': completedTasksToday.map((x) => x.toMap()).toList(),
+      'completedTasksWeek': completedTasksWeek.map(
+        (key, value) => MapEntry(
+          key,
+          value.map((task) => task.toMap()).toList(),
+        ),
+      ),
       'plannedTasksForWeek': plannedTasksForWeek.map(
         (key, value) => MapEntry(
           key,
@@ -55,13 +60,17 @@ class User extends Equatable {
   static User fromMap(Map<String, dynamic> map) {
     return User(
       name: map['name'] as String,
-      completedTasksToday: map['completedTasksToday'] != null
-          ? (map['completedTasksToday'] as List<dynamic>)
+      completedTasksWeek:
+          (map['completedTasksWeek'] as Map<String, dynamic>).map(
+        (day, tasks) => MapEntry(
+          day,
+          (tasks as List<dynamic>)
               .map(
                 (task) => IdentifiedTask.fromMap(task as Map<String, dynamic>),
               )
-              .toList()
-          : [],
+              .toList(),
+        ),
+      ),
       plannedTasksForWeek:
           (map['plannedTasksForWeek'] as Map<String, dynamic>).map(
         (day, tasks) => MapEntry(
@@ -97,14 +106,15 @@ class User extends Equatable {
 
   User copyWith({
     String? name,
-    List<IdentifiedTask>? completedTasksToday,
+    Map<String, List<IdentifiedTask>>? completedTasksWeek,
     Map<String, List<IdentifiedTask>>? plannedTasksForWeek,
     Map<LifeAspect, double>? expectedScores,
-    Map<String, List<IdentifiedTask>>? overdueTasks, // Добавляем copyWith для нового поля
+    Map<String, List<IdentifiedTask>>?
+        overdueTasks, // Добавляем copyWith для нового поля
   }) {
     return User(
       name: name ?? this.name,
-      completedTasksToday: completedTasksToday ?? this.completedTasksToday,
+      completedTasksWeek: completedTasksWeek ?? this.completedTasksWeek,
       plannedTasksForWeek: plannedTasksForWeek ?? this.plannedTasksForWeek,
       expectedScores: expectedScores ?? this.expectedScores,
       overdueTasks: overdueTasks ?? this.overdueTasks, // Присваиваем новое поле

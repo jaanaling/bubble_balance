@@ -42,21 +42,23 @@ class PlanTaskForWeek extends LifeAspectEvent {
 
 class MarkTaskAsCompleted extends LifeAspectEvent {
   final IdentifiedTask task;
-  MarkTaskAsCompleted(this.task);
+    final String day;
+  MarkTaskAsCompleted(this.task, this.day);
 
   @override
-  List<Object> get props => [task];
+  List<Object> get props => [task, day];
 }
 
 class GenerateAnalytics extends LifeAspectEvent {}
 
 class AddCompletedTaskForToday extends LifeAspectEvent {
   final Task task;
+    final String day;
 
-  AddCompletedTaskForToday(this.task);
+  AddCompletedTaskForToday(this.task, this.day);
 
   @override
-  List<Object> get props => [task];
+  List<Object> get props => [task, day];
 }
 
 class RemoveOverdueTask extends LifeAspectEvent {

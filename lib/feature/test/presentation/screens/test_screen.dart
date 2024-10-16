@@ -29,7 +29,7 @@ class TestScreen extends StatelessWidget {
             final currentQuestion =
                 curTest.questions[curTest.currentQuestionIndex];
 
-            logger.d(curTest.currentQuestionIndex);
+   
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

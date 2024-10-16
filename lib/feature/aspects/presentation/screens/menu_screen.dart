@@ -1,3 +1,4 @@
+import 'package:bubblebalance/core/utils/log.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,9 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
   int pageIndex = 0;
-  String day = '${DateTime.now().weekday}';
   final PageController _pageController = PageController();
+  String day = '${DateTime.now().weekday}';
+
   final List<String> weekdays = [
     'Monday',
     'Tuesday',
@@ -29,7 +31,7 @@ class _MenuScreenState extends State<MenuScreen> {
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday'
+    'Sunday',
   ];
 
   String getFormattedDate(String dayString) {
@@ -67,6 +69,9 @@ class _MenuScreenState extends State<MenuScreen> {
                       height: 250,
                       color: CupertinoColors.systemBackground,
                       child: CupertinoPicker(
+                        scrollController: FixedExtentScrollController(
+                          initialItem: int.parse(day) - 1,
+                        ),
                         itemExtent: 32.0,
                         onSelectedItemChanged: (int index) {
                           setState(() {
@@ -74,9 +79,14 @@ class _MenuScreenState extends State<MenuScreen> {
                           });
                         },
                         children: weekdays
-                            .map((day) => Text(day,
+                            .map(
+                              (day) => Text(
+                                day,
                                 style: TextStyle(
-                                    color: CupertinoColors.activeBlue)))
+                                  color: CupertinoColors.activeBlue,
+                                ),
+                              ),
+                            )
                             .toList(),
                       ),
                     );
@@ -105,7 +115,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     const Icon(
                       Icons.keyboard_arrow_down,
                       color: Color(0xFF939393),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -125,21 +135,13 @@ class _MenuScreenState extends State<MenuScreen> {
                   itemCount: state.aspects.length,
                   itemBuilder: (context, index) {
                     final aspect = state.aspects[index];
+                    final ind =
+                        _selectedIndex == 1 ? day : '${DateTime.now().weekday}';
                     final List<IdentifiedTask> completedTasks =
-                        _selectedIndex == 0 ||
-                                day == "${DateTime.now().weekday}"
-                            ? state.user.completedTasksToday
-                            : [];
-                    final plannedTasks = state.user.plannedTasksForWeek[
-                            _selectedIndex == 1
-                                ? day
-                                : "${DateTime.now().weekday}"] ??
-                        [];
-                    final overdueTasks = state.user.overdueTasks[
-                            _selectedIndex == 1
-                                ? day
-                                : "${DateTime.now().weekday}"] ??
-                        [];
+                        state.user.completedTasksWeek[ind] ?? [];
+                    final plannedTasks =
+                        state.user.plannedTasksForWeek[ind] ?? [];
+                    final overdueTasks = state.user.overdueTasks[ind] ?? [];
 
                     final tasks = [
                       ...completedTasks,
@@ -152,8 +154,8 @@ class _MenuScreenState extends State<MenuScreen> {
                         )
                         .toList();
 
-                    final aspectScores = state.user.completedTasksToday
-                        .where(
+                    final aspectScores = state.user.completedTasksWeek[day]
+                        ?.where(
                           (t) => t.task.aspectScores.containsKey(aspect.name),
                         )
                         .map(
@@ -170,20 +172,21 @@ class _MenuScreenState extends State<MenuScreen> {
                               (t) => t.task.aspectScores[aspect.name] ?? 0,
                             );
 
-                    final Color color = aspectScores.isNotEmpty
-                        ? getColorFromScores(
-                            aspectScores.reduce(
-                                  (value, element) => value + element,
-                                ) +
-                                (plannedAspectedScores != null &&
-                                        plannedAspectedScores.isNotEmpty
-                                    ? plannedAspectedScores.reduce(
-                                        (value, element) => value + element,
-                                      )
-                                    : 0),
-                            state.aspects[index].optimalScore,
-                          ).withOpacity(1.0)
-                        : const Color(0xFFD72E58);
+                    final Color color =
+                        (aspectScores != null && aspectScores.isNotEmpty)
+                            ? getColorFromScores(
+                                aspectScores.reduce(
+                                      (value, element) => value + element,
+                                    ) +
+                                    (plannedAspectedScores != null &&
+                                            plannedAspectedScores.isNotEmpty
+                                        ? plannedAspectedScores.reduce(
+                                            (value, element) => value + element,
+                                          )
+                                        : 0),
+                                state.aspects[index].optimalScore,
+                              ).withOpacity(1.0)
+                            : const Color(0xFFD72E58);
 
                     return Column(
                       children: [
@@ -196,22 +199,9 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         const Gap(14),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Stack(
+                          alignment: Alignment.center,
                           children: [
-                            if (pageIndex > 0)
-                              IconButton(
-                                onPressed: () => setState(() {
-                                  _pageController.jumpToPage(--pageIndex);
-                                }),
-                                icon: const Icon(
-                                  CupertinoIcons.left_chevron,
-                                  color: Color(0xFFB5B5B5),
-                                ),
-                                iconSize: 55,
-                              ),
-                            if (state.aspects.length > pageIndex + 1)
-                              const Spacer(),
                             Container(
                               height: MediaQuery.of(context).size.height * 0.3,
                               width: MediaQuery.of(context).size.height * 0.3,
@@ -231,19 +221,40 @@ class _MenuScreenState extends State<MenuScreen> {
                                 ),
                               ),
                             ),
-                            if (state.aspects.length > pageIndex + 1)
-                              IconButton(
-                                onPressed: () => setState(() {
-                                  _pageController.jumpToPage(++pageIndex);
-                                }),
-                                icon: const Icon(
-                                  CupertinoIcons.right_chevron,
-                                  color: Color(0xFFB5B5B5),
+                            if (pageIndex > 0)
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: IconButton(
+                                  onPressed: () => setState(() {
+                                    logger.d(pageIndex);
+                                    pageIndex--;
+
+                                    _pageController.jumpToPage(pageIndex);
+                                  }),
+                                  icon: const Icon(
+                                    CupertinoIcons.left_chevron,
+                                    color: Color(0xFFB5B5B5),
+                                  ),
+                                  iconSize: 55,
                                 ),
-                                iconSize: 55,
                               ),
-                            if (state.aspects.length <= pageIndex + 1)
-                              const Spacer(),
+                            if (state.aspects.length > pageIndex + 1)
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: IconButton(
+                                  onPressed: () => setState(() {
+                                    logger.d(pageIndex);
+                                    pageIndex++;
+
+                                    _pageController.jumpToPage(pageIndex);
+                                  }),
+                                  icon: const Icon(
+                                    CupertinoIcons.right_chevron,
+                                    color: Color(0xFFB5B5B5),
+                                  ),
+                                  iconSize: 55,
+                                ),
+                              ),
                           ],
                         ),
                         const Gap(25),
@@ -337,18 +348,21 @@ class _MenuScreenState extends State<MenuScreen> {
                                       onPressed: () {
                                         if (completedTasks
                                             .contains(tasks[index])) {}
-                                        if ((plannedTasks
-                                            .contains(tasks[index]))) {
+                                        if (plannedTasks
+                                                .contains(tasks[index]) &&
+                                            int.parse(day) <=
+                                                DateTime.now().weekday) {
                                           context.read<LifeAspectBloc>().add(
                                                 MarkTaskAsCompleted(
                                                   tasks[index],
+                                                  day,
                                                 ),
                                               );
                                         }
                                         if (overdueTasks
                                             .contains(tasks[index])) {
                                           context.read<LifeAspectBloc>().add(
-                                                RemoveOverdueTask(
+                                                AddCompletedTaskFromOverdue(
                                                   day: day,
                                                   task: tasks[index],
                                                 ),
@@ -357,10 +371,15 @@ class _MenuScreenState extends State<MenuScreen> {
                                       },
                                       icon: Icon(
                                         Icons.check,
-                                        color: !completedTasks
-                                                .contains(tasks[index])
-                                            ? Colors.green
-                                            : Colors.transparent,
+                                        color: completedTasks
+                                                    .contains(tasks[index]) ||
+                                                (plannedTasks.contains(
+                                                      tasks[index],
+                                                    ) &&
+                                                    int.parse(day) >
+                                                        DateTime.now().weekday)
+                                            ? Colors.transparent
+                                            : Colors.green,
                                         size: 30,
                                       ),
                                     ),

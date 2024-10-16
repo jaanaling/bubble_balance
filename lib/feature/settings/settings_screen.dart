@@ -112,9 +112,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 actions: [
                   CupertinoDialogAction(
                       child: Text("Yes"),
-                      onPressed: () {
+                      onPressed: () async {
                         prefs.clear();
-                        loadInitialData();
+                       await loadInitialData();
                         context.read<TestBloc>().add(LoadTestsEvent());
                         context.read<LifeAspectBloc>().add(LoadAspects());
 

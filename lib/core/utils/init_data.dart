@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:bubblebalance/feature/aspects/models/user.dart';
+import 'package:bubblebalance/feature/aspects/repository/user_data_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:bubblebalance/core/dependency_injection.dart';
 import 'package:bubblebalance/feature/aspects/models/life_aspect.dart';
@@ -43,6 +45,17 @@ Future<void> loadInitialData() async {
     final List<PsychologicalTest> tests = testsList
         .map((test) => PsychologicalTest.fromMap(test as Map<String, dynamic>))
         .toList();
-    await locator<TestRepository>().saveUserPsychologicalTests(tests); // Метод для сохранения тестов
+    await locator<TestRepository>()
+        .saveUserPsychologicalTests(tests); // Метод для сохранения тестов
+  }
+
+  if (!prefs.containsKey('user')) {
+    await locator<UserDataRepository>().saveUser(User(
+      name: 'User',
+      completedTasksWeek: const {},
+      plannedTasksForWeek: const {},
+      expectedScores: const {},
+      overdueTasks: const {},
+    ));
   }
 }

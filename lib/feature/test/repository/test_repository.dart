@@ -83,7 +83,7 @@ class TestRepository {
         }
 
         test.currentQuestionIndex = test.currentQuestionIndex + 1;
-        logger.d( test.currentQuestionIndex);
+  
 
         break;
       }

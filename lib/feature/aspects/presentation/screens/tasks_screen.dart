@@ -40,7 +40,7 @@ class TasksScreen extends StatelessWidget {
         context.read<LifeAspectBloc>().add(
               isPlaning
                   ? PlanTaskForWeek(tasks[index], day!)
-                  : AddCompletedTaskForToday(tasks[index]),
+                  : AddCompletedTaskForToday(tasks[index], DateTime.now().weekday.toString()),
             );
         context.pop();
       },

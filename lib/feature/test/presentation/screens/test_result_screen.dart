@@ -18,7 +18,6 @@ class TestResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d(test);
     return Padding(
       padding: const EdgeInsets.only(top: 36, bottom: 80),
       child: Column(

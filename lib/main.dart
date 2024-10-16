@@ -30,17 +30,15 @@ Future<void> main() async {
 
   await resetDailyScores();
 
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
-  final FirebaseMessaging messaging = FirebaseMessaging.instance;
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
-
 
   runApp(
     const AppRoot(),
@@ -82,11 +80,15 @@ Future<void> resetDailyScores() async {
     final User? user = await locator<UserDataRepository>().getUser();
 
     if (user != null) {
-      await locator<UserDataRepository>().saveUserAnalytics(UserAnalytics(
-          user: user, date: DateFormat('yyyy-MM-dd').format(DateTime.now()),),);
+      await locator<UserDataRepository>().saveUserAnalytics(
+        UserAnalytics(
+          user: user,
+          date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        ),
+      );
       final updatedUser = User(
         name: user.name,
-        completedTasksToday: const [],
+        completedTasksWeek: user.completedTasksWeek,
         plannedTasksForWeek: user.plannedTasksForWeek,
         expectedScores: user.expectedScores,
         overdueTasks: user.overdueTasks,

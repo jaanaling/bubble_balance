@@ -15,10 +15,25 @@ class UserDataRepository {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String userJson = user.toJson();
     logger.d(userJson);
-    
     await prefs.setString('user', userJson);
-    await saveUserAnalytics(UserAnalytics(
-        user: user, date: DateFormat('yyyy-MM-dd').format(DateTime.now())));
+    String monthName =
+        DateFormat('MMMM').format(DateTime.now()); // Получение названия месяца
+    DateTime firstDayOfMonth =
+        DateTime(DateTime.now().year, DateTime.now().month, 1);
+
+    // Узнаем день недели для первого дня месяца
+    int firstWeekday = firstDayOfMonth.weekday;
+
+    // Считаем, сколько дней с начала недели до текущей даты
+    int daysOffset = DateTime.now().day + firstWeekday - 1;
+
+    // Считаем номер недели
+
+    int monthWeek = (daysOffset / 7).ceil();
+
+    String result = '$monthName $monthWeek';
+
+    await saveUserAnalytics(UserAnalytics(user: user, date: result));
     locator<AnalyticsBloc>()..add(LoadAnalyticsEvent());
   }
 
@@ -31,30 +46,19 @@ class UserDataRepository {
     return null;
   }
 
-  Future<void> addCompletedTaskForToday(IdentifiedTask task) async {
+  Future<void> addCompletedTaskForToday(
+      Map<String, List<IdentifiedTask>> completedTasksWeek) async {
     final User? user = await getUser();
-    if (user != null) {
-      user.completedTasksToday.add(task);
-      removeTaskFromPlannedForWeek(task);
 
-      await saveUser(user);
-    }
-  }
-
-  Future<void> updateCompletedTasks(List<IdentifiedTask> completedTasks) async {
-    final User? user = await getUser();
     if (user != null) {
-      user.completedTasksToday = completedTasks;
-      await saveUser(user);
-    }
-  }
+      completedTasksWeek.forEach((day, tasks) {
+        if (user.completedTasksWeek.containsKey(day)) {
+          user.completedTasksWeek[day]?.addAll(tasks);
+        } else {
+          user.completedTasksWeek[day] = tasks;
+        }
+      });
 
-  Future<void> updatePlannedTasks(
-    Map<String, List<IdentifiedTask>> plannedTasks,
-  ) async {
-    final User? user = await getUser();
-    if (user != null) {
-      user.plannedTasksForWeek = plannedTasks;
       await saveUser(user);
     }
   }
@@ -82,6 +86,7 @@ class UserDataRepository {
     final String? existingAnalyticsJson = prefs.getString('user_analytics');
 
     List<UserAnalytics> analyticsList = [];
+    logger.d(existingAnalyticsJson);
 
     if (existingAnalyticsJson != null) {
       final List<dynamic> existingAnalyticsList =
@@ -93,8 +98,10 @@ class UserDataRepository {
     if (analyticsList.where((t) => t.date == analytics.date).isNotEmpty) {
       analyticsList[analyticsList.indexWhere((t) => t.date == analytics.date)] =
           analytics;
+      logger.d(analyticsList);
     } else {
       analyticsList.add(analytics);
+      logger.d(analyticsList);
     }
 
     final String newAnalyticsJson =
@@ -141,13 +148,19 @@ class UserDataRepository {
     }
   }
 
-  Future<void> removeCompletedTaskForToday(IdentifiedTask task) async {
+  Future<void> removeCompletedTaskForToday(
+      IdentifiedTask task, String day) async {
     final User? user = await getUser();
     if (user != null) {
-      final updatedCompletedTasks =
-          user.completedTasksToday.where((t) => t.id != task.id).toList();
-      user.completedTasksToday = updatedCompletedTasks;
-      await saveUser(user);
+      if (user.completedTasksWeek.containsKey(day)) {
+        user.completedTasksWeek[day]?.removeWhere((t) => t.id == task.id);
+
+        if (user.completedTasksWeek[day]?.isEmpty ?? false) {
+          user.completedTasksWeek.remove(day);
+        }
+
+        await saveUser(user);
+      }
     }
   }
 
@@ -207,7 +220,9 @@ class UserDataRepository {
     final User? user = await getUser();
     if (user != null) {
       if (user.overdueTasks.containsKey(day)) {
-        await addCompletedTaskForToday(task);
+        await addCompletedTaskForToday({
+          day: [task]
+        });
 
         await removeOverdueTask(day, task);
       }
@@ -218,11 +233,9 @@ class UserDataRepository {
     final User? user = await getUser();
     logger.d(user.toString());
     if (user != null) {
-      final completedTasksCount = user.completedTasksToday.length;
-
       final updatedUser = User(
         name: user.name,
-        completedTasksToday: [],
+        completedTasksWeek: {},
         plannedTasksForWeek: {},
         expectedScores: user.expectedScores,
         overdueTasks: {},

@@ -1,4 +1,5 @@
 import 'package:bubblebalance/core/dependency_injection.dart';
+import 'package:bubblebalance/core/utils/log.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,23 +21,40 @@ class AnalyticsScreen extends StatefulWidget {
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
   DateTime selectedDate = DateTime.now();
 
+  int pageIndex = 0;
+  final PageController _pageController = PageController();
+
   UserAnalytics _getAnalyticsForDate(
       DateTime date, List<UserAnalytics> analyticsData) {
     return analyticsData.firstWhere(
-      (data) => data.date == DateFormat('yyyy-MM-dd').format(date),
+      (data) => data.date == getFormattedDate(date),
       orElse: () => UserAnalytics(
           user: User(
               name: '',
-              completedTasksToday: [],
+              completedTasksWeek: {},
               plannedTasksForWeek: {},
               expectedScores: {},
               overdueTasks: {}),
-          date: DateFormat('yyyy-MM-dd').format(date)),
+          date: getFormattedDate(date)),
     );
   }
 
   String getFormattedDate(DateTime date) {
-    return DateFormat('d MMMM yyyy').format(date);
+    String monthName =
+        DateFormat('MMMM').format(date); // Получение названия месяца
+    DateTime firstDayOfMonth = DateTime(date.year, date.month, 1);
+
+    // Узнаем день недели для первого дня месяца
+    int firstWeekday = firstDayOfMonth.weekday;
+
+    // Считаем, сколько дней с начала недели до текущей даты
+    int daysOffset = date.day + firstWeekday - 1;
+
+    // Считаем номер недели
+
+    int monthWeek = (daysOffset / 7).ceil();
+    logger.d(monthWeek);
+    return '$monthName $monthWeek';
   }
 
   @override
@@ -54,7 +72,11 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
               final selectedAnalytics =
                   _getAnalyticsForDate(selectedDate, state.analytics);
-              final completedTasks = selectedAnalytics.user.completedTasksToday;
+              final completedTasks = selectedAnalytics.user
+                      .completedTasksWeek[selectedDate.weekday.toString()] ??
+                  [];
+              logger.d(selectedAnalytics);
+              logger.d(completedTasks);
 
               for (final asp in completedTasks) {
                 aspects.addAll(asp.task.aspectScores.keys);
@@ -132,7 +154,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              getFormattedDate(selectedDate),
+                              DateFormat('yyyy-MM-dd').format(selectedDate),
                               style: TextStyle(
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500,
@@ -152,6 +174,12 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   ),
                   Expanded(
                     child: PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          pageIndex = index;
+                        });
+                      },
                       itemCount: aspects.length,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -167,42 +195,92 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                               ),
                               Gap(16),
                               Expanded(
-                                child: SfCircularChart(
-                                  legend: Legend(
-                                    isVisible: true,
-                                    position: LegendPosition.bottom,
-                                  ),
-                                  series: <CircularSeries>[
-                                    PieSeries<_TaskData, String>(
-                                      dataSource: [
-                                        _TaskData(
-                                          'Completed',
-                                          aspectScores[
-                                                  aspects.elementAt(index)] ??
-                                              0,
-                                        ),
-                                        _TaskData(
-                                          'To optimal',
-                                          waitingScore[aspects
-                                                      .elementAt(index)] !=
-                                                  null
-                                              ? waitingScore[aspects
-                                                      .elementAt(index)]! -
-                                                  (aspectScores[aspects
+                                child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: SfCircularChart(
+                                          legend: Legend(
+                                            isVisible: true,
+                                            position: LegendPosition.bottom,
+                                          ),
+                                          series: <CircularSeries>[
+                                            PieSeries<_TaskData, String>(
+                                              dataSource: [
+                                                _TaskData(
+                                                  'Completed',
+                                                  aspectScores[aspects
                                                           .elementAt(index)] ??
-                                                      0)
-                                              : 0,
+                                                      0,
+                                                ),
+                                                _TaskData(
+                                                  'To optimal',
+                                                  waitingScore[
+                                                              aspects.elementAt(
+                                                                  index)] !=
+                                                          null
+                                                      ? waitingScore[
+                                                              aspects.elementAt(
+                                                                  index)]! -
+                                                          (aspectScores[aspects
+                                                                  .elementAt(
+                                                                      index)] ??
+                                                              0)
+                                                      : 0,
+                                                ),
+                                              ],
+                                              xValueMapper:
+                                                  (_TaskData data, _) =>
+                                                      data.taskType,
+                                              yValueMapper:
+                                                  (_TaskData data, _) =>
+                                                      data.taskCount,
+                                              dataLabelSettings:
+                                                  DataLabelSettings(
+                                                      isVisible: true),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                      xValueMapper: (_TaskData data, _) =>
-                                          data.taskType,
-                                      yValueMapper: (_TaskData data, _) =>
-                                          data.taskCount,
-                                      dataLabelSettings:
-                                          DataLabelSettings(isVisible: true),
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      if (pageIndex > 0)
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: IconButton(
+                                            onPressed: () => setState(() {
+                                              logger.d(pageIndex);
+                                              pageIndex--;
+
+                                              _pageController
+                                                  .jumpToPage(pageIndex);
+                                            }),
+                                            icon: const Icon(
+                                              CupertinoIcons.left_chevron,
+                                              color: Color(0xFFB5B5B5),
+                                            ),
+                                            iconSize: 55,
+                                          ),
+                                        ),
+                                      if (aspects.length > pageIndex + 1)
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: IconButton(
+                                            onPressed: () => setState(() {
+                                              logger.d(pageIndex);
+                                              pageIndex++;
+
+                                              _pageController
+                                                  .jumpToPage(pageIndex);
+                                            }),
+                                            icon: const Icon(
+                                              CupertinoIcons.right_chevron,
+                                              color: Color(0xFFB5B5B5),
+                                            ),
+                                            iconSize: 55,
+                                          ),
+                                        ),
+                                    ]),
                               )
                             ],
                           ),

@@ -43,7 +43,7 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
       final user = await userRepository.getUser() ??
           User(
             name: 'User',
-            completedTasksToday: const [],
+            completedTasksWeek: const {},
             plannedTasksForWeek: const {},
             expectedScores: const {},
             overdueTasks: const {},
@@ -138,14 +138,16 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
         },
         expectedScores: expectedScores,
       );
-      
-      await userRepository.checkAndAddOverdueTasks(updatedUser.plannedTasksForWeek);
-     
+
+      await userRepository
+          .checkAndAddOverdueTasks(updatedUser.plannedTasksForWeek);
+  
+
       _emitUpdatedState(
         emit,
         currentState.aspects,
         currentState.tasks,
-        await userRepository.getUser() ?? updatedUser ,
+        await userRepository.getUser() ?? updatedUser,
       );
     }
   }
@@ -156,6 +158,7 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
   ) async {
     if (state is AspectsLoaded) {
       final currentState = state as AspectsLoaded;
+      final dayOfWeek = event.day; // Ожидаем, что event передаст день недели
 
       final updatedPlannedTasksForWeek = Map<String, List<IdentifiedTask>>.from(
         currentState.user.plannedTasksForWeek,
@@ -164,11 +167,16 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
         tasks.removeWhere((t) => t.id == event.task.id);
       });
 
+      final updatedCompletedTasksWeek = Map<String, List<IdentifiedTask>>.from(
+        currentState.user.completedTasksWeek ?? {},
+      );
+      updatedCompletedTasksWeek[dayOfWeek] = [
+        ...updatedCompletedTasksWeek[dayOfWeek] ?? [],
+        event.task,
+      ];
+
       final updatedUser = currentState.user.copyWith(
-        completedTasksToday: [
-          ...currentState.user.completedTasksToday,
-          event.task,
-        ],
+        completedTasksWeek: updatedCompletedTasksWeek,
         plannedTasksForWeek: updatedPlannedTasksForWeek,
       );
 
@@ -188,16 +196,95 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
   ) async {
     if (state is AspectsLoaded) {
       final currentState = state as AspectsLoaded;
+      final dayOfWeek = event.day; // Ожидаем день недели в event
+
       final task = IdentifiedTask(
         id: const Uuid().v4(),
         task: event.task,
       );
+
+      final updatedCompletedTasksWeek = Map<String, List<IdentifiedTask>>.from(
+        currentState.user.completedTasksWeek,
+      );
+      updatedCompletedTasksWeek[dayOfWeek] = [
+        ...updatedCompletedTasksWeek[dayOfWeek] ?? [],
+        task,
+      ];
+
       final updatedUser = currentState.user.copyWith(
-        completedTasksToday: [...currentState.user.completedTasksToday, task],
+        completedTasksWeek: updatedCompletedTasksWeek,
       );
 
       await userRepository.saveUser(updatedUser);
-      await userRepository.addCompletedTaskForToday(task);
+
+      // Передача списка задач в addCompletedTaskForToday
+      await userRepository.addCompletedTaskForToday({
+        dayOfWeek: [task],
+      });
+
+      _emitUpdatedState(
+        emit,
+        currentState.aspects,
+        currentState.tasks,
+        updatedUser,
+      );
+    }
+  }
+
+  Future<void> _onAddCompletedTaskFromOverdue(
+    AddCompletedTaskFromOverdue event,
+    Emitter<LifeAspectState> emit,
+  ) async {
+    if (state is AspectsLoaded) {
+      final currentState = state as AspectsLoaded;
+
+      if (currentState.user.overdueTasks.containsKey(event.day)) {
+        final taskToAdd = event.task;
+
+        await _onAddCompletedTaskForToday(
+          AddCompletedTaskForToday(taskToAdd.task, event.day),
+          emit,
+        );
+
+        await _onRemoveOverdueTask(
+          RemoveOverdueTask(day: event.day, task: taskToAdd),
+          emit,
+        );
+        final updatedUser = await userRepository.getUser();
+
+        _emitUpdatedState(
+          emit,
+          currentState.aspects,
+          currentState.tasks,
+          updatedUser!,
+        );
+      }
+    }
+  }
+
+  Future<void> _onDeleteCompletedTask(
+    DeleteCompletedTask event,
+    Emitter<LifeAspectState> emit,
+  ) async {
+    if (state is AspectsLoaded) {
+      final currentState = state as AspectsLoaded;
+      final dayOfWeek = event.day; // Ожидаем день недели
+
+      final updatedCompletedTasksWeek = Map<String, List<IdentifiedTask>>.from(
+        currentState.user.completedTasksWeek ?? {},
+      );
+      updatedCompletedTasksWeek[dayOfWeek]
+          ?.removeWhere((t) => t.id == event.task.id);
+
+      if (updatedCompletedTasksWeek[dayOfWeek]?.isEmpty ?? false) {
+        updatedCompletedTasksWeek.remove(dayOfWeek);
+      }
+
+      final updatedUser = currentState.user.copyWith(
+        completedTasksWeek: updatedCompletedTasksWeek,
+      );
+
+      await userRepository.saveUser(updatedUser);
       _emitUpdatedState(
         emit,
         currentState.aspects,
@@ -230,52 +317,6 @@ class LifeAspectBloc extends Bloc<LifeAspectEvent, LifeAspectState> {
           currentState.user,
         );
       }
-    }
-  }
-
-  Future<void> _onAddCompletedTaskFromOverdue(
-    AddCompletedTaskFromOverdue event,
-    Emitter<LifeAspectState> emit,
-  ) async {
-    if (state is AspectsLoaded) {
-      final currentState = state as AspectsLoaded;
-
-      if (currentState.user.overdueTasks.containsKey(event.day)) {
-        final taskToAdd = event.task;
-
-        await _onAddCompletedTaskForToday(
-          AddCompletedTaskForToday(taskToAdd.task),
-          emit,
-        );
-
-        await _onRemoveOverdueTask(
-          RemoveOverdueTask(day: event.day, task: taskToAdd),
-          emit,
-        );
-      }
-    }
-  }
-
-
-
-  Future<void> _onDeleteCompletedTask(
-    DeleteCompletedTask event,
-    Emitter<LifeAspectState> emit,
-  ) async {
-    if (state is AspectsLoaded) {
-      final currentState = state as AspectsLoaded;
-
-      currentState.user.completedTasksToday
-          .removeWhere((t) => t.id == event.task.id);
-
-      await userRepository.saveUser(currentState.user);
-
-      _emitUpdatedState(
-        emit,
-        currentState.aspects,
-        currentState.tasks,
-        currentState.user,
-      );
     }
   }
 
