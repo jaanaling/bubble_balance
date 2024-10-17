@@ -9,6 +9,7 @@ enum RouteValue {
   test(path: 'test'),
   testResult(path: 'testResult'),
   privicy(path: 'privicy'),
+  research(path: 'research'),
   unknown(path: '');
 
   final String path;

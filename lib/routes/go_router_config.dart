@@ -134,18 +134,32 @@ GoRouter globalRouter = GoRouter(
                     },
                   ),
                   GoRoute(
-                    parentNavigatorKey: _quizNavigatorKey,
-                    path: RouteValue.testResult.path,
-                    pageBuilder: (context, state) {
-                      return slideTransition(
-                        state: state,
-                        child: TestResultScreen(
-                          test: state.extra as PsychologicalTest,
-                          key: UniqueKey(),
+                      parentNavigatorKey: _quizNavigatorKey,
+                      path: RouteValue.testResult.path,
+                      pageBuilder: (context, state) {
+                        return slideTransition(
+                          state: state,
+                          child: TestResultScreen(
+                            test: state.extra as PsychologicalTest,
+                            key: UniqueKey(),
+                          ),
+                        );
+                      },
+                      routes: [
+                        GoRoute(
+                          parentNavigatorKey: _quizNavigatorKey,
+                          path: RouteValue.research.path,
+                          pageBuilder: (context, state) {
+                            return slideTransition(
+                              state: state,
+                              child: ResearchScreen(
+                                url: state.extra! as String,
+                                key: UniqueKey(),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
+                      ]),
                 ]),
           ],
         ),

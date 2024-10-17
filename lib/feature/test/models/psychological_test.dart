@@ -8,6 +8,7 @@ import 'package:bubblebalance/feature/test/models/test_result.dart';
 class PsychologicalTest {
   final String id;
   final String title;
+  final String link;
   final String description;
   final List<TestQuestion> questions;
   final String category;
@@ -19,6 +20,7 @@ class PsychologicalTest {
   PsychologicalTest({
     required this.id,
     required this.title,
+    required this.link,
     required this.description,
     required this.questions,
     required this.category,
@@ -32,6 +34,7 @@ class PsychologicalTest {
     return {
       'id': id,
       'title': title,
+      'link': link,
       'description': description,
       'questions': questions.map((q) => q.toMap()).toList(),
       'category': category,
@@ -45,6 +48,7 @@ class PsychologicalTest {
   factory PsychologicalTest.fromMap(Map<String, dynamic> map) {
     return PsychologicalTest(
       id: map['id'] as String,
+      link: map['link'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
       questions: List<TestQuestion>.from(
@@ -67,6 +71,7 @@ class PsychologicalTest {
   PsychologicalTest copyWith({
     String? id,
     String? title,
+    String? link,
     String? description,
     List<TestQuestion>? questions,
     String? category,
@@ -78,6 +83,7 @@ class PsychologicalTest {
     return PsychologicalTest(
       id: id ?? this.id,
       title: title ?? this.title,
+      link: link ?? this.link,
       description: description ?? this.description,
       questions: questions ?? this.questions,
       category: category ?? this.category,
@@ -95,6 +101,7 @@ class PsychologicalTest {
     return 
       other.id == id &&
       other.title == title &&
+      other.link == link &&
       other.description == description &&
       listEquals(other.questions, questions) &&
       other.category == category &&
@@ -107,6 +114,7 @@ class PsychologicalTest {
   @override
   int get hashCode {
     return id.hashCode ^
+      link.hashCode ^
       title.hashCode ^
       description.hashCode ^
       questions.hashCode ^

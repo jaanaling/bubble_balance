@@ -1,16 +1,12 @@
-import 'package:flutter/foundation.dart';
+import 'package:bubblebalance/routes/route_value.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bubblebalance/core/dependency_injection.dart';
-import 'package:bubblebalance/core/utils/icon_provider.dart';
-import 'package:bubblebalance/core/utils/log.dart';
 import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
 import 'package:bubblebalance/feature/test/models/psychological_test.dart';
-import 'package:bubblebalance/feature/test/repository/test_repository.dart';
-import 'package:bubblebalance/routes/route_value.dart';
-import 'package:bubblebalance/ui_kit/app_icon/widget/app_icon.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TestResultScreen extends StatelessWidget {
   final PsychologicalTest test;
@@ -49,6 +45,22 @@ class TestResultScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                       fontFamily: 'Mon',
+                    ),
+                  ),
+                  CupertinoButton(
+                    onPressed: () {
+                      context.push(
+                          "${RouteValue.tests.path}/${RouteValue.testResult.path}/${RouteValue.research.path}",
+                          extra: test.link);
+                    },
+                    child: Text(
+                      "Link to the Research",
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w400,
+                        color: CupertinoColors.activeBlue,
+                        fontFamily: 'Mon',
+                      ),
                     ),
                   ),
                   Material(
@@ -128,6 +140,48 @@ class TestResultScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ResearchScreen extends StatefulWidget {
+  final String url;
+  const ResearchScreen({super.key, required this.url});
+
+  @override
+  State<ResearchScreen> createState() => _ResearchScreenState();
+}
+
+class _ResearchScreenState extends State<ResearchScreen> {
+  late final WebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      backgroundColor: Colors.white,
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: WebViewWidget(
+                controller: _controller
+                  ..loadRequest(Uri.parse(widget.url))
+                  ..setBackgroundColor(
+                    Colors.white,
+                  ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

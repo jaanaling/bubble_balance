@@ -2,6 +2,7 @@
   {
     "id": "1",
     "title": "Stress Level Test",
+    "link": "https://www.apa.org/topics/stress",
     "description": "This test helps assess your current stress levels based on various factors.",
     "questions": [
       {
@@ -126,6 +127,7 @@
   {
     "id": "2",
     "title": "Anxiety Test",
+    "link": "https://www.psycom.net/anxiety-test",
     "description": "This test assesses your level of anxiety and provides insights.",
     "questions": [
       {
@@ -250,6 +252,7 @@
   {
     "id": "3",
     "title": "Depression Screening Test",
+    "link": "https://www.psychiatry.org/patients-families/depression/faq",
     "description": "This test helps assess symptoms of depression.",
     "questions": [
       {
@@ -343,6 +346,7 @@
   {
     "id": "4",
     "title": "Self-Esteem Test",
+    "link": "https://www.psychologytoday.com/us/tests/personality/self-esteem-test",
     "description": "This test evaluates your self-esteem levels.",
     "questions": [
       {
@@ -436,6 +440,7 @@
   {
     "id": "5",
     "title": "Sleep Quality Test",
+    "link": "https://www.sleepfoundation.org/sleep-quality",
     "description": "This test assesses the quality of your sleep.",
     "questions": [
       {
@@ -529,6 +534,7 @@
   {
     "id": "6",
     "title": "Work-Life Balance Test",
+    "link": "https://www.mindtools.com/pages/article/newTMM_95.htm",
     "description": "This test evaluates your work-life balance.",
     "questions": [
       {
@@ -622,6 +628,7 @@
   {
     "id": "7",
     "title": "Stress Management Test",
+    "link": "https://www.psychologytoday.com/us/tests/stress-management",
     "description": "This test assesses your current stress management strategies.",
     "questions": [
       {
@@ -715,6 +722,7 @@
   {
     "id": "8",
     "title": "Anxiety Test",
+    "link": "https://www.psycom.net/anxiety-test",
     "description": "This test helps evaluate your anxiety levels.",
     "questions": [
       {
@@ -808,6 +816,7 @@
   {
     "id": "9",
     "title": "Social Connection Test",
+    "link": "https://greatergood.berkeley.edu/quizzes/connection_quiz",
     "description": "This test assesses your social connections and support.",
     "questions": [
       {
@@ -901,6 +910,7 @@
   {
     "id": "10",
     "title": "Mindfulness Test",
+    "link": "https://www.meditationpeace.com/mindfulness-test.html",
     "description": "This test assesses your mindfulness practices.",
     "questions": [
       {
@@ -994,6 +1004,7 @@
   {
     "id": "11",
     "title": "Emotional Awareness Test",
+    "link": "https://www.psychologytoday.com/us/tests/personality/emotional-intelligence-test",
     "description": "This test helps assess your emotional awareness.",
     "questions": [
       {
@@ -1087,6 +1098,7 @@
   {
     "id": "12",
     "title": "Gratitude Test",
+    "link": "https://www.psychologytoday.com/us/tests/personality/gratitude-questionnaire",
     "description": "This test assesses your practice of gratitude.",
     "questions": [
       {
@@ -1175,6 +1187,7 @@
   {
     "id": "13",
     "title": "Coping Skills Test",
+    "link": "https://www.verywellmind.com/coping-skills-inventory-2795462",
     "description": "This test evaluates your coping skills.",
     "questions": [
       {
@@ -1253,6 +1266,7 @@
   {
     "id": "14",
     "title": "Self-Esteem Test",
+    "link": "https://www.psychologytoday.com/us/tests/personality/self-esteem-test",
     "description": "This test evaluates your self-esteem levels.",
     "questions": [
       {
@@ -1346,6 +1360,7 @@
   {
     "id": "15",
     "title": "Resilience Test",
+    "link": "https://www.psychologytoday.com/us/tests/personality/resilience-test",
     "description": "This test assesses your resilience in facing challenges.",
     "questions": [
       {

@@ -15,6 +15,37 @@ class TestsScreen extends StatefulWidget {
 
 class _TestsScreenState extends State<TestsScreen> {
   int _selectedIndex = 0;
+  void _showDialog(BuildContext context) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text('Important Notice'),
+        content: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Text(
+            'The tests provided are for educational and entertainment purposes only and are not medical. '
+            'The results of these tests cannot replace professional consultation. '
+            'If you have serious psychological or emotional issues, it is strongly recommended to consult a qualified psychologist or psychiatrist for professional assistance and accurate information.',
+          ),
+        ),
+        actions: [
+          CupertinoDialogAction(
+            child: Text('Understood'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _showDialog(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,80 +80,85 @@ class _TestsScreenState extends State<TestsScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(13),
                     ),
-                    color: isCompleted ? Colors.green.shade100 : const Color(0xFFEFEFEF),
+                    color: isCompleted
+                        ? Colors.green.shade100
+                        : const Color(0xFFEFEFEF),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  test.title,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Mon',
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  test.description,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Mon',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Gap(16),
-                          InkWell(
-                            onTap: () {
-                              context.read<TestBloc>().add(SetCurrentTestEvent(test));
-
-                              isCompleted
-                                  ? context.push(
-                                '${RouteValue.tests.path}/${RouteValue.testResult.path}',
-                                extra: test,
-                              )
-                                  : context.push(
-                                '${RouteValue.tests.path}/${RouteValue.test.path}',
-                                extra: test,
-                              );
-                            },
-                            borderRadius: BorderRadius.circular(25),
-                            child: Ink(
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color(0xFFF5C660),
-                                    Color(0xFFF264CE),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 11),
-                                  child: Text(
-                                    'Start',
-                                    style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 18, vertical: 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    test.title,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
                                       fontFamily: 'Mon',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    test.description,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mon',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Gap(16),
+                            InkWell(
+                              onTap: () {
+                                context
+                                    .read<TestBloc>()
+                                    .add(SetCurrentTestEvent(test));
+
+                                isCompleted
+                                    ? context.push(
+                                        '${RouteValue.tests.path}/${RouteValue.testResult.path}',
+                                        extra: test,
+                                      )
+                                    : context.push(
+                                        '${RouteValue.tests.path}/${RouteValue.test.path}',
+                                        extra: test,
+                                      );
+                              },
+                              borderRadius: BorderRadius.circular(25),
+                              child: Ink(
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Color(0xFFF5C660),
+                                      Color(0xFFF264CE),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: const Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 11),
+                                    child: Text(
+                                      'Start',
+                                      style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                        fontFamily: 'Mon',
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ),
+                          ],
+                        )),
                   );
                 },
               ),
@@ -182,8 +218,15 @@ class _TestsScreenState extends State<TestsScreen> {
         child: Text(
           label,
           style: _selectedIndex == index
-              ? const TextStyle(fontSize: 24, color: Colors.white,  fontFamily: 'Mon',)
-              : const TextStyle(fontSize: 24,  fontFamily: 'Mon',),
+              ? const TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontFamily: 'Mon',
+                )
+              : const TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'Mon',
+                ),
           textAlign: TextAlign.center,
         ),
       ),
