@@ -30,10 +30,10 @@ Future<void> main() async {
 
   await resetDailyScores();
 
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
-  // final FirebaseMessaging messaging = FirebaseMessaging.instance;
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

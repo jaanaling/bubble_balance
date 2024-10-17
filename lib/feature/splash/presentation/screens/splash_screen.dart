@@ -25,15 +25,16 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 1000));
 
     final adId = await AdvertisingId.id(true);
-  //  FirebaseMessaging instance = FirebaseMessaging.instance;
-   // final settings =
-   //     await instance.requestPermission(alert: true, badge: true, sound: true);
-   // if (settings.authorizationStatus != AuthorizationStatus.authorized) {
-   //   SharedPreferences.getInstance()
-   //       .then((prefs) => prefs.setBool('notificationsEnabled', false));
+   FirebaseMessaging instance = FirebaseMessaging.instance;
+   final settings =
+       await instance.requestPermission(alert: true, badge: true, sound: true);
+   if (settings.authorizationStatus != AuthorizationStatus.authorized) {
+     SharedPreferences.getInstance()
+         .then((prefs) => prefs.setBool('notificationsEnabled', false));
 
-      context.go(RouteValue.menu.path);
-   // }
+      
+   }
+   context.go(RouteValue.menu.path);
   }
 
   @override
