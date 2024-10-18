@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bubblebalance/feature/test/bloc/test_bloc.dart';
 import 'package:bubblebalance/feature/test/models/psychological_test.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TestResultScreen extends StatelessWidget {
@@ -48,10 +49,11 @@ class TestResultScreen extends StatelessWidget {
                     ),
                   ),
                   CupertinoButton(
-                    onPressed: () {
-                      context.push(
-                          "${RouteValue.tests.path}/${RouteValue.testResult.path}/${RouteValue.research.path}",
-                          extra: test.link);
+                    onPressed: () async {
+                      if (await canLaunch(test.link)) {
+    await launch(test.link);
+  }
+                     
                     },
                     child: Text(
                       "Link to the Research",
