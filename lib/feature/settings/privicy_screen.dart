@@ -30,6 +30,14 @@ class _PrivicyScreenState extends State<PrivicyScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       backgroundColor: Colors.white,
+      navigationBar: CupertinoNavigationBar(
+        middle: const Text('Privacy Policy'),
+        leading: CupertinoNavigationBarBackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       child: SafeArea(
         child: Column(
           children: [
@@ -37,7 +45,7 @@ class _PrivicyScreenState extends State<PrivicyScreen> {
               child: WebViewWidget(
                 controller: _controller
                   ..loadRequest(
-                     Uri.parse("https://bubblebalancea.com/privacy.html"))
+                      Uri.parse("https://bubblebalancea.com/privacy.html"))
                   ..setBackgroundColor(
                     Colors.white,
                   ),

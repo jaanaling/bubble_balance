@@ -1,3 +1,4 @@
+import 'package:core_logic/core_logic.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +151,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 56),
               child: Text(
-                'Pravicy policy',
+                'Privacy policy',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: CupertinoColors.activeBlue,

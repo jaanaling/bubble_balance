@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:bubblebalance/firebase_options.dart';
+import 'package:bubblebalance/routes/route_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -13,24 +16,33 @@ import 'core/dependency_injection.dart';
 import 'feature/app/presentation/app_root.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:core_logic/core_logic.dart';
+import 'package:core_amplitude/core_amplitude.dart';
+
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
+  runZonedGuarded(() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupDependencyInjection();
   tz.initializeTimeZones();
-  await requestIOSPermissions();
   await loadInitialData();
 
   await locator<UserDataRepository>().checkAndAddOverdueTasks(
     (await locator<UserDataRepository>().getUser())?.plannedTasksForWeek ?? {},
   );
 
+  FlutterError.onError = (FlutterErrorDetails details) {
+         _handleFlutterError(details);
+      };
+
   await resetDailyScores();
 
-  await Firebase.initializeApp();
+   await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
 
   final FirebaseMessaging messaging = FirebaseMessaging.instance;
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -40,9 +52,21 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  await InitializationUtil.coreInit(
+    domain: 'bubblebalancea.com',
+    amplitudeKey: '6e2e123f7a72088de2ecf4bee32a3b4',
+    appsflyerDevKey: 'itWzWpyu4WUntPctTm8Jqe',
+    appId: 'com.superpaper.balancebubbles',
+    iosAppId: '6736939244',
+    initialRoute: RouteValue.menu.path, facebookAppId: '1698188717422133', facebookClientToken: '79152d0635e71af9299df0c60d6fe545',
+  );
+
   runApp(
     const AppRoot(),
   );
+  }, (Object error, StackTrace stackTrace) {
+      _handleAsyncError(error, stackTrace);
+   });
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -53,23 +77,11 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   }
 }
 
-Future<void> requestIOSPermissions() async {
-  if (Platform.isIOS) {
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
-  }
-}
-
 Future<void> resetDailyScores() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final String? savedDate = prefs.getString('last_reset_date');
   final String currentDate = DateTime.now().toIso8601String().split('T').first;
+
 
   if (savedDate != currentDate) {
     await locator<UserDataRepository>().checkAndAddOverdueTasks(
@@ -94,6 +106,8 @@ Future<void> resetDailyScores() async {
         overdueTasks: user.overdueTasks,
       );
 
+      
+
       await locator<UserDataRepository>().saveUser(updatedUser);
     }
 
@@ -109,4 +123,20 @@ Future<void> resetDailyScores() async {
 
     await prefs.setString('last_reset_week_date', currentDate);
   }
+}
+
+void _handleFlutterError(FlutterErrorDetails details) {
+   AmplitudeUtil.logFailure(
+      details.exception is Exception ? Failure.exception : Failure.error,
+      details.exception.toString(),
+      details.stack,
+   );
+}
+
+void _handleAsyncError(Object error, StackTrace stackTrace) {
+   AmplitudeUtil.logFailure(
+      error is Exception ? Failure.exception : Failure.error,
+      error.toString(),
+      stackTrace,
+   );
 }

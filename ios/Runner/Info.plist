@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Balance Bubble</string>
+	<string>Plink: Bubble Balance</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -52,5 +52,22 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<!-- FACEBOOK SDK CONFIG -->
+<key>CFBundleURLTypes</key>
+<array>
+<dict>
+   <key>CFBundleURLSchemes</key>
+   <array>
+      <string>fb1698188717422133</string>
+   </array>
+</dict>
+</array>
+<key>FacebookAppID</key>
+<string>1698188717422133</string>
+<key>FacebookClientToken</key>
+<string>79152d0635e71af9299df0c60d6fe545</string>
+<key>FacebookDisplayName</key>
+<string>Plink: Bubble Balance</string>
+<!-- FACEBOOK SDK CONFIG -->
 </dict>
 </plist>
