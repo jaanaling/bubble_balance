@@ -26,14 +26,13 @@ dependencies:
   core_logic:
     git:
       url: https://github.com/Vennylost/core_logic.git
-      tag: 1.0.4
-      ref: 03fa1d7324aac347cdd4733288bbb16f9376872f
+      ref: 4ced5ce522ece5e97859d94dbcf6422675194d42
   uuid: ^4.5.1
   flutter_datetime_picker_plus: ^2.2.0
   firebase_core: ^3.2.0
   firebase_messaging: ^15.0.3
   intl: ^0.19.0
-  syncfusion_flutter_charts: ^27.1.48
+  syncfusion_flutter_charts: ^28.1.33
   advertising_id: ^2.7.1
   url_launcher: ^6.0.20
 
@@ -50,6 +49,7 @@ flutter:
       - assets/json/
       - assets/fonts/
       - assets/images/
+      - assets/generated/
 
 
   fonts:

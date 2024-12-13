@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InitializationCubit()..initialize(),
+      create: (context) => InitializationCubit()..initialize(context),
       child: BlocListener<InitializationCubit, InitializationState>(
         listener: (context, state) {
           if (state is InitializedState) {
